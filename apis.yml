@@ -61,6 +61,8 @@ apis:
       - type: Documentation
         title: Create Order Reference
         url: https://looksrare.dev/reference/createorder
+      - type: OpenAPI
+        url: openapi/looksrare-openapi.json
 
   - aid: looksrare:events-api
     name: LooksRare Events API
@@ -159,6 +161,8 @@ common:
     url: rate-limits/looksrare-rate-limits.yml
   - type: FinOps
     url: finops/looksrare-finops.yml
+  - type: JSONLd
+    url: json-ld/looksrare.jsonld
 integrations:
   - name: Ethereum
   - name: Sepolia

@@ -1,0 +1,123 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "nft": "https://w3id.org/nft/",
+    "looksrare": "https://looksrare.org/vocab#",
+
+    "Organization": "schema:Organization",
+    "WebAPI": "schema:WebAPI",
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "Product": "schema:Product",
+    "Offer": "schema:Offer",
+    "ItemList": "schema:ItemList",
+    "ListItem": "schema:ListItem",
+    "Event": "schema:Event",
+    "Action": "schema:Action",
+    "BuyAction": "schema:BuyAction",
+    "SellAction": "schema:SellAction",
+    "TradeAction": "schema:TradeAction",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "identifier": "schema:identifier",
+    "image": "schema:image",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "provider": "schema:provider",
+    "offers": "schema:offers",
+    "price": "schema:price",
+    "priceCurrency": "schema:priceCurrency",
+    "seller": "schema:seller",
+    "buyer": "schema:buyer",
+    "itemOffered": "schema:itemOffered",
+    "validFrom": "schema:validFrom",
+    "validThrough": "schema:validThrough",
+    "status": "schema:status",
+    "startDate": "schema:startDate",
+    "endDate": "schema:endDate",
+    "dateCreated": "schema:dateCreated",
+    "dateModified": "schema:dateModified",
+    "version": "schema:version",
+    "documentation": "schema:documentation",
+    "termsOfService": "schema:termsOfService",
+
+    "MakerOrder": "looksrare:MakerOrder",
+    "NFTCollection": "looksrare:NFTCollection",
+    "NFTToken": "looksrare:NFTToken",
+    "MarketplaceEvent": "looksrare:MarketplaceEvent",
+    "quoteType": "looksrare:quoteType",
+    "strategyId": "looksrare:strategyId",
+    "collectionType": "looksrare:collectionType",
+    "orderNonce": "looksrare:orderNonce",
+    "globalNonce": "looksrare:globalNonce",
+    "subsetNonce": "looksrare:subsetNonce",
+    "signer": "looksrare:signer",
+    "collection": "looksrare:collection",
+    "currency": "looksrare:currency",
+    "itemIds": "looksrare:itemIds",
+    "amounts": "looksrare:amounts",
+    "additionalParameters": "looksrare:additionalParameters",
+    "signature": "looksrare:signature",
+    "merkleRoot": "looksrare:merkleRoot",
+    "merkleProof": "looksrare:merkleProof",
+    "eventType": "looksrare:eventType",
+    "seaportEligible": "looksrare:seaportEligible",
+    "logoURI": "looksrare:logoURI",
+    "bannerURI": "looksrare:bannerURI",
+    "animationURI": "looksrare:animationURI",
+    "traitType": "looksrare:traitType",
+    "displayType": "looksrare:displayType",
+
+    "contractAddress": {
+      "@id": "looksrare:contractAddress",
+      "@type": "xsd:string"
+    },
+    "tokenId": {
+      "@id": "looksrare:tokenId",
+      "@type": "xsd:string"
+    },
+    "priceWei": {
+      "@id": "looksrare:priceWei",
+      "@type": "xsd:string"
+    },
+    "startTime": {
+      "@id": "looksrare:startTime",
+      "@type": "xsd:integer"
+    },
+    "endTime": {
+      "@id": "looksrare:endTime",
+      "@type": "xsd:integer"
+    }
+  },
+  "@type": "Organization",
+  "@id": "https://looksrare.org",
+  "name": "LooksRare",
+  "description": "LooksRare is a community-first NFT marketplace built on Ethereum that rewards traders, collectors, and creators with LOOKS token incentives. The platform operates an off-chain order book with on-chain settlement via the LooksRare V2 protocol and Seaport integration.",
+  "url": "https://looksrare.org",
+  "logo": "https://looksrare.org/favicon.ico",
+  "sameAs": [
+    "https://x.com/LooksRare",
+    "https://discord.gg/LooksRareDevelopers",
+    "https://github.com/LooksRare",
+    "https://docs.looksrare.org",
+    "https://looksrare.dev"
+  ],
+  "offers": {
+    "@type": "WebAPI",
+    "name": "LooksRare Public API",
+    "description": "REST API exposing read and write access to NFT orders, marketplace events, token metadata, and collection data across Ethereum Mainnet and Sepolia testnet.",
+    "documentation": "https://looksrare.dev",
+    "url": "https://api.looksrare.org/api",
+    "version": "2.0.0",
+    "provider": {
+      "@type": "Organization",
+      "@id": "https://looksrare.org"
+    },
+    "termsOfService": "https://looksrare.dev"
+  }
+}
