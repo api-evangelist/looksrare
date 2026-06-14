@@ -1,0 +1,172 @@
+aid: looksrare
+url: https://raw.githubusercontent.com/api-evangelist/looksrare/refs/heads/main/apis.yml
+name: LooksRare
+kind: company
+description: >-
+  LooksRare is a community-first NFT marketplace built on Ethereum that rewards
+  traders, collectors, and creators with LOOKS token incentives. The platform
+  operates an off-chain order book with on-chain settlement via the LooksRare
+  V2 protocol (and Seaport integration), supporting standard and collection-wide
+  orders for ERC-721 and ERC-1155 tokens. The public REST API exposes read and
+  write access to orders, events (listings, sales, offers, cancellations), token
+  metadata, and collection data across Ethereum Mainnet and the Sepolia testnet.
+  API access is free with attribution; a mainnet API key is required for write
+  operations such as order creation.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - NFT
+  - Marketplace
+  - Ethereum
+  - Web3
+  - Orders
+  - Collections
+  - Tokens
+  - Events
+  - ERC-721
+  - ERC-1155
+  - Seaport
+  - Community
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+x-source: community
+x-category: NFT
+x-tier: 2
+x-type: company
+apis:
+  - aid: looksrare:orders-api
+    name: LooksRare Orders API
+    description: >-
+      Read and write NFT maker orders in the LooksRare V2 off-chain order book.
+      GET /v2/orders retrieves asks (listings) and bids (offers) with flexible
+      filtering by collection, token ID, signer, status, and strategy (standard
+      or collection-wide). POST /v2/orders submits a signed maker order — either
+      an ask or a bid — requiring a valid ECDSA signature, nonce values, price
+      in wei, and collection/token details. Seaport-compatible endpoints at
+      /v2/orders/seaport enable listing and bidding through the Seaport protocol
+      while still earning LooksRare rewards and gems.
+    humanURL: https://looksrare.dev/reference/getorders
+    baseURL: https://api.looksrare.org/api
+    tags:
+      - Orders
+      - NFT
+      - Listings
+      - Offers
+      - Seaport
+      - ERC-721
+      - ERC-1155
+    properties:
+      - type: Documentation
+        url: https://looksrare.dev/reference/getorders
+      - type: Documentation
+        title: Create Order Reference
+        url: https://looksrare.dev/reference/createorder
+
+  - aid: looksrare:events-api
+    name: LooksRare Events API
+    description: >-
+      Retrieve token and order activity events from the LooksRare marketplace
+      including LIST, SALE, OFFER, CANCEL_LIST, and CANCEL_OFFER event types.
+      GET /v2/events supports filtering by collection address, token ID, sender
+      address, receiver address, and event type, with cursor-based pagination
+      (up to 150 results per page). Events are ordered by creation timestamp.
+      The legacy /v1/events endpoint covers historical V1 protocol events,
+      mints, and transfers. Seaport events are available at /v2/events/seaport.
+    humanURL: https://looksrare.dev/reference/getevents
+    baseURL: https://api.looksrare.org/api
+    tags:
+      - Events
+      - NFT
+      - Activity
+      - Sales
+      - Listings
+      - Seaport
+    properties:
+      - type: Documentation
+        url: https://looksrare.dev/reference/getevents
+
+  - aid: looksrare:tokens-api
+    name: LooksRare Tokens API
+    description: >-
+      Retrieve NFT token metadata including token details, collection
+      information, and token attributes for any token indexed by LooksRare.
+      GET /v1/tokens accepts a collection contract address and token ID as
+      required query parameters and returns the full token record including
+      its parent collection metadata and on-chain attribute traits.
+    humanURL: https://looksrare.dev/
+    baseURL: https://api.looksrare.org/api
+    tags:
+      - Tokens
+      - NFT
+      - Metadata
+      - Attributes
+      - Collections
+    properties:
+      - type: Documentation
+        url: https://looksrare.dev/
+
+  - aid: looksrare:collections-api
+    name: LooksRare Collections API
+    description: >-
+      Retrieve collection-level data for NFT collections indexed on LooksRare.
+      Endpoints return Collection objects including logoURI, bannerURI, and
+      collection statistics. The /v2/collections/seaport endpoint checks whether
+      a specific collection is eligible for trading via the LooksRare Seaport
+      integration. Collection data is embedded in token and event responses
+      as well as being available directly.
+    humanURL: https://looksrare.dev/
+    baseURL: https://api.looksrare.org/api
+    tags:
+      - Collections
+      - NFT
+      - Metadata
+      - Statistics
+      - Seaport
+    properties:
+      - type: Documentation
+        url: https://looksrare.dev/
+
+common:
+  - type: Website
+    url: https://looksrare.org
+  - type: Documentation
+    url: https://docs.looksrare.org/developers/welcome
+  - type: Portal
+    url: https://looksrare.dev
+  - type: ChangeLog
+    url: https://looksrare.dev/changelog
+  - type: GitHubOrganization
+    url: https://github.com/LooksRare
+  - type: SDK
+    title: LooksRare SDK v2 (TypeScript)
+    url: https://github.com/LooksRare/sdk-v2
+  - type: SDK
+    title: '@looksrare/sdk-v2 (npm)'
+    url: https://www.npmjs.com/package/@looksrare/sdk-v2
+  - type: Discord
+    title: Developer Discord
+    url: https://discord.gg/LooksRareDevelopers
+  - type: Twitter
+    url: https://x.com/LooksRare
+  - type: Blog
+    url: https://docs.looksrare.org/blog
+  - type: ProtocolDocs
+    title: LooksRare V2 Protocol Overview
+    url: https://docs.looksrare.org/developers/protocol/looksrare-v2-protocol-overview
+  - type: Plans
+    url: plans/looksrare-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/looksrare-rate-limits.yml
+  - type: FinOps
+    url: finops/looksrare-finops.yml
+integrations:
+  - name: Ethereum
+  - name: Sepolia
+  - name: Seaport
+  - name: ERC-721
+  - name: ERC-1155
+  - name: LOOKS Token
+  - name: WETH
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

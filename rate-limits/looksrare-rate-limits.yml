@@ -1,0 +1,97 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: LooksRare
+providerId: looksrare
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - NFT
+  - Marketplace
+  - Ethereum
+  - Rate Limiting
+  - Throttling
+description: >-
+  Rate limit envelope for the LooksRare public REST API. A 10-second server-side
+  response cache is applied to all endpoints — repeated identical requests within
+  10 seconds will return cached data. Default rate limits apply to all API keys;
+  elevated limits are available by request via the developer Discord for
+  production applications. The Retry-After response header is sent with all
+  HTTP 429 responses.
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  serviceUnavailable: 500
+limits:
+  - tier: default
+    name: Default (All API Keys)
+    scope: api-key
+    metric: requests_per_second
+    limit: null
+    burst: null
+    timeFrame: second
+    applies:
+      - https://api.looksrare.org/api
+    description: >-
+      Exact default request-per-second limits are not publicly documented by
+      LooksRare. A 10-second response cache is in place across all endpoints.
+      Requests that exceed the undisclosed threshold receive HTTP 429 with a
+      Retry-After header. Contact the developer Discord to understand current
+      limits for your API key.
+
+  - tier: default
+    name: Response Cache Window
+    scope: endpoint
+    metric: cache_seconds
+    limit: 10
+    timeFrame: seconds
+    applies:
+      - https://api.looksrare.org/api
+    description: >-
+      LooksRare applies a 10-second cache to API responses. Clients making
+      identical requests within this window will receive the same cached payload.
+      Design polling loops to respect this cadence.
+
+  - tier: elevated
+    name: Elevated (By Request)
+    scope: api-key
+    metric: requests_per_second
+    limit: null
+    burst: null
+    timeFrame: second
+    applies:
+      - https://api.looksrare.org/api
+    description: >-
+      Higher rate limits are available upon request for production applications
+      via the developer Discord. Approval is unlikely for applications still in
+      development. Final limits are negotiated on a case-by-case basis.
+
+  - tier: testnet
+    name: Sepolia Testnet (No Key Required)
+    scope: ip
+    metric: requests_per_second
+    limit: null
+    timeFrame: second
+    applies:
+      - https://api-sepolia.looksrare.org/api
+    description: >-
+      The Sepolia testnet endpoint requires no API key and is intended for
+      integration development and testing. Rate limits apply but are not
+      publicly documented.
+
+recoveryStrategies:
+  - name: Honour Retry-After
+    description: When HTTP 429 is received, wait the number of seconds in the Retry-After response header before retrying.
+  - name: Respect Cache Window
+    description: Avoid making identical requests more than once every 10 seconds; the server cache will return the same response and consume quota unnecessarily.
+  - name: Exponential Backoff
+    description: If Retry-After is absent or unclear, back off exponentially starting at 2s up to a 30s ceiling.
+  - name: Use Pagination Cursor
+    description: Use cursor-based pagination (pagination[cursor]) rather than re-fetching from the first page to reduce total request volume.
+
+notes:
+  - The Retry-After header was added to 429 responses for token refresh operations in January 2023.
+  - Pagination for GET /v2/orders and GET /v2/events accepts pagination[first] (max 150, default 20) and pagination[cursor] (order or event ID).
+  - For write operations (POST /v2/orders), a mainnet API key obtained via the developer Discord is required.

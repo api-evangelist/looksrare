@@ -1,0 +1,155 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: LooksRare
+providerId: looksrare
+publisherName: LooksRare
+serviceCategory: API
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - NFT
+  - Marketplace
+  - Ethereum
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: >-
+  FinOps Framework alignment for the LooksRare public REST API. The LooksRare
+  API itself is free, so the primary cost domains for integrators are Ethereum
+  gas (for on-chain settlement of matched orders), attribution compliance
+  (operational cost of UI implementation), and development time for mainnet API
+  key onboarding. Any platform building on LooksRare should also account for
+  the opportunity cost of LOOKS token dynamics affecting marketplace liquidity
+  and user behaviour.
+principles:
+  - name: Visibility
+    description: Track on-chain settlement gas costs per NFT trade alongside any engineering time spent integrating the API and maintaining the required attribution UI.
+  - name: Allocation
+    description: Tag each indexed collection, token query, and event poll with the consuming team and application feature to attribute infrastructure costs and rate-limit quota to the right business unit.
+  - name: Optimization
+    description: Leverage the 10-second response cache by aligning polling intervals; use cursor-based pagination to minimise redundant requests; develop on Sepolia (no API key required) before requesting a mainnet key.
+  - name: Accountability
+    description: Assign ownership of attribution compliance, API key management, and Ethereum gas budget to named engineering or product owners.
+
+domains:
+  - name: API Access Cost
+    description: The LooksRare public REST API is free to use with attribution. There is no subscription fee, per-call charge, or data fee.
+    costDrivers:
+      - attribution_ui_engineering
+      - api_key_onboarding
+    focusMapping:
+      ChargeCategory: Purchase
+      ChargeClass: One-time
+      ServiceCategory: API
+      ServiceSubcategory: NFT Marketplace
+      PricingCategory: Free
+      PricingUnit: attribution_implementation
+
+  - name: On-Chain Gas (Order Settlement)
+    description: >-
+      NFT trades matched via the LooksRare order book are settled on Ethereum
+      Mainnet. The buyer (taker) pays gas for the settlement transaction.
+      Integrators building taker-side UIs should expose gas estimates and
+      display current base fee to users. Gas cost varies with Ethereum network
+      congestion and trade complexity (standard vs collection order).
+    costDrivers:
+      - ethereum_base_fee_gwei
+      - order_type (standard vs collection)
+      - erc_standard (ERC-721 vs ERC-1155)
+    focusMapping:
+      ChargeCategory: Usage
+      ChargeClass: Consumption
+      ServiceCategory: Blockchain
+      ServiceSubcategory: Gas
+      PricingCategory: Variable
+      PricingUnit: gas_units
+
+  - name: Development and Maintenance
+    description: >-
+      Engineering cost to integrate the API, implement attribution UI, manage
+      API key rotation, handle pagination, and adapt to API changelog updates
+      (e.g. V1-to-V2 migration, Seaport endpoint additions).
+    costDrivers:
+      - integration_complexity
+      - changelog_frequency
+      - attribution_ui_maintenance
+    focusMapping:
+      ChargeCategory: Usage
+      ChargeClass: Other
+      ServiceCategory: API
+      ServiceSubcategory: Integration
+      PricingCategory: Variable
+      PricingUnit: engineering_hours
+
+  - name: Elevated Rate Limit Onboarding
+    description: >-
+      If an application requires higher rate limits, the developer must engage
+      with the LooksRare team via Discord and demonstrate a production-ready
+      integration. This represents an operational overhead cost.
+    costDrivers:
+      - request_volume
+      - discord_engagement_time
+    focusMapping:
+      ChargeCategory: Purchase
+      ChargeClass: One-time
+      ServiceCategory: API
+      ServiceSubcategory: Rate Limits
+      PricingCategory: Free
+      PricingUnit: onboarding_hours
+
+focusFields:
+  required:
+    - BillingPeriodStart
+    - BillingPeriodEnd
+    - ChargeCategory
+    - ChargePeriodStart
+    - ChargePeriodEnd
+    - ProviderName
+    - PublisherName
+    - InvoiceIssuerName
+    - ServiceName
+    - ServiceCategory
+    - BilledCost
+    - EffectiveCost
+    - ListCost
+    - ContractedCost
+    - PricingCategory
+    - PricingUnit
+    - PricingQuantity
+  recommended:
+    - SubAccountId
+    - SubAccountName
+    - ResourceId
+    - ResourceName
+    - ResourceType
+    - Region
+    - Tags
+  looksRareSpecific:
+    - x-lr-collection (NFT collection contract address queried)
+    - x-lr-chain (ethereum or sepolia)
+    - x-lr-api-version (v1 or v2)
+    - x-lr-order-type (ask or bid)
+    - x-lr-strategy (standard or collection)
+    - x-lr-gas-used (on-chain gas consumed for settlement transactions)
+
+unitEconomics:
+  - metric: Cost per Order Created
+    formula: On-chain gas cost / Count of successful POST /v2/orders submissions
+    insight: Track gas efficiency of order creation frequency; avoid creating orders that are unlikely to be filled.
+  - metric: API Requests per Active Collection
+    formula: Total API calls in period / Distinct collection addresses queried
+    insight: Identify over-queried collections and implement local caching to stay within default rate limits.
+  - metric: Cache Hit Rate
+    formula: Requests returning cached data (within 10s window) / Total requests
+    insight: Aligning polling intervals to the 10-second cache window reduces wasted quota.
+
+notes:
+  - LooksRare listing rewards (LOOKS token incentives per trade) were discontinued 2023-03-15, eliminating that revenue-offset dimension for integrators.
+  - On-chain gas is the dominant variable cost for integrators building NFT trading interfaces on top of LooksRare; monitor Ethereum gas prices and implement gas estimation via the LooksRare SDK v2.
+  - The Seaport integration (v2/orders/seaport) may have different gas profiles than the native LooksRare V2 protocol — benchmark both paths for gas-sensitive applications.

@@ -1,0 +1,97 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: LooksRare
+providerId: looksrare
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - NFT
+  - Marketplace
+  - Ethereum
+  - Web3
+description: >-
+  LooksRare's public API is available free of charge with a mandatory attribution
+  requirement — any platform displaying LooksRare NFT data must show a visible
+  link back to the LooksRare marketplace. A mainnet API key is required for
+  write operations (order creation) and can be requested via the developer
+  Discord. The Sepolia testnet endpoint requires no API key.
+plans:
+  - id: looksrare-free
+    name: Free (Attribution Required)
+    type: free
+    description: >-
+      Full access to all public API read endpoints at no cost. Developers must
+      display attribution to LooksRare (a link to the marketplace) alongside
+      any NFT data surfaced on their platform or application. A mainnet API key
+      is required for POST /v2/orders (order creation); keys are requested via
+      the LooksRare developer Discord. Sepolia testnet access requires no key.
+    entries:
+      - label: API Access
+        description: Free read access to all public REST endpoints
+        name: api_access
+        type: feature
+        metric: feature
+        limit: null
+        timeFrame: account
+        geo: global
+        domains:
+          - https://api.looksrare.org
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: API Key (Mainnet Write)
+        description: Required for POST /v2/orders; requested via developer Discord
+        name: api_key_write
+        type: feature
+        metric: feature
+        limit: 1
+        timeFrame: account
+        geo: global
+        domains:
+          - https://api.looksrare.org
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Attribution Requirement
+        description: Must display a link to looksrare.org alongside any displayed NFT data
+        name: attribution
+        type: requirement
+        metric: feature
+        limit: null
+        timeFrame: account
+
+  - id: looksrare-elevated
+    name: Elevated Rate Limits (By Request)
+    type: custom
+    description: >-
+      Higher rate limits are available upon request but require a production
+      application. LooksRare has indicated it is unlikely to grant elevated
+      limits to applications still under development. Developers should contact
+      the team via the developer Discord to discuss requirements.
+    entries:
+      - label: Rate Limit Increase
+        description: Higher sustained request rate for production applications
+        name: rate_limit_elevated
+        type: rate
+        metric: requests_per_second
+        limit: null
+        timeFrame: second
+        geo: global
+        domains:
+          - https://api.looksrare.org
+        unit: 1
+        price: '0.00'
+        notes: Amount determined case-by-case via Discord request
+
+references:
+  - name: LooksRare Public API Documentation
+    url: https://docs.looksrare.org/developers/public-api-documentation
+  - name: LooksRare Developer Discord
+    url: https://discord.gg/LooksRareDevelopers
+  - name: LooksRare APIs.yml
+    url: https://raw.githubusercontent.com/api-evangelist/looksrare/refs/heads/main/apis.yml
+notes:
+  - The attribution requirement applies to both web and app interfaces showing LooksRare data.
+  - The Sepolia testnet base URL (https://api-sepolia.looksrare.org/api/) is fully open with no API key required.
+  - LooksRare listing rewards were discontinued on 2023-03-15; the related reward endpoints have been deprecated.
