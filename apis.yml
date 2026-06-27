@@ -139,10 +139,10 @@ common:
     url: https://looksrare.dev/changelog
   - type: GitHubOrganization
     url: https://github.com/LooksRare
-  - type: SDK
+  - type: SDKs
     title: LooksRare SDK v2 (TypeScript)
     url: https://github.com/LooksRare/sdk-v2
-  - type: SDK
+  - type: SDKs
     title: '@looksrare/sdk-v2 (npm)'
     url: https://www.npmjs.com/package/@looksrare/sdk-v2
   - type: Discord
@@ -161,7 +161,7 @@ common:
     url: rate-limits/looksrare-rate-limits.yml
   - type: FinOps
     url: finops/looksrare-finops.yml
-  - type: JSONLd
+  - type: JSONLD
     url: json-ld/looksrare.jsonld
 integrations:
   - name: Ethereum
