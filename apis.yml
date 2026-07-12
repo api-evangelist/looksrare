@@ -129,6 +129,10 @@ apis:
         url: https://looksrare.dev/
 
 common:
+  - type: DomainSecurity
+    url: security/looksrare-domain-security.yml
+  - type: Authentication
+    url: authentication/looksrare-authentication.yml
   - type: Website
     url: https://looksrare.org
   - type: Documentation

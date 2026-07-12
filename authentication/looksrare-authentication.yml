@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/looksrare-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-Looks-Api-Key
+  description: API key required for mainnet write operations (order creation). Not needed for
+    read endpoints or testnet.
+  sources:
+  - openapi/looksrare-openapi.json
