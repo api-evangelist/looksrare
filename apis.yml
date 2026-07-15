@@ -129,6 +129,8 @@ apis:
         url: https://looksrare.dev/
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/looksrare-agentic-access.yml
   - type: DomainSecurity
     url: security/looksrare-domain-security.yml
   - type: Authentication
