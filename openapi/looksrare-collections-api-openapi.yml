@@ -1,0 +1,107 @@
+openapi: 3.1.0
+info:
+  title: LooksRare Public Collections API
+  description: LooksRare is a community-first NFT marketplace built on Ethereum. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet (https://api.looksrare.org) and the Sepolia testnet (https://api-sepolia.looksrare.org). A mainnet API key is required for write operations such as order creation.
+  version: 2.0.0
+  contact:
+    url: https://looksrare.dev
+  license:
+    name: Attribution Required
+    url: https://looksrare.dev
+  x-logo:
+    url: https://looksrare.org/favicon.ico
+servers:
+- url: https://api.looksrare.org/api
+  description: Ethereum Mainnet
+- url: https://api-sepolia.looksrare.org/api
+  description: Sepolia Testnet
+security: []
+tags:
+- name: Collections
+  description: Retrieve NFT collection-level metadata, statistics, and integration eligibility.
+paths:
+  /v2/collections/seaport:
+    get:
+      operationId: checkCollectionSeaportEligibility
+      summary: Check Seaport eligibility for a collection
+      description: Check whether a specific NFT collection is eligible for trading via the LooksRare Seaport integration.
+      tags:
+      - Collections
+      parameters:
+      - name: collection
+        in: query
+        required: true
+        description: Collection contract address to check.
+        schema:
+          $ref: '#/components/schemas/EthereumAddress'
+      responses:
+        '200':
+          description: Seaport eligibility status for the collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSeaportResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Human-readable error message.
+    CollectionSeaportResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            eligible:
+              type: boolean
+              description: Whether this collection is eligible for trading via LooksRare Seaport.
+    EthereumAddress:
+      type: string
+      pattern: ^0x[a-fA-F0-9]{40}$
+      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
+      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
+  responses:
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimitExceeded:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Looks-Api-Key
+      description: API key required for mainnet write operations (order creation). Not needed for read endpoints or testnet.
+externalDocs:
+  description: LooksRare Developer Documentation
+  url: https://looksrare.dev
