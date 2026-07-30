@@ -12,7 +12,20 @@ description: >-
   metadata, and collection data across Ethereum Mainnet and the Sepolia testnet.
   API access is free with attribution; a mainnet API key is required for write
   operations such as order creation.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/looksrare.png
 tags:
   - NFT
   - Marketplace
@@ -34,100 +47,139 @@ x-category: NFT
 x-tier: 2
 x-type: company
 apis:
-  - aid: looksrare:orders-api
-    name: LooksRare Orders API
-    description: >-
-      Read and write NFT maker orders in the LooksRare V2 off-chain order book.
-      GET /v2/orders retrieves asks (listings) and bids (offers) with flexible
-      filtering by collection, token ID, signer, status, and strategy (standard
-      or collection-wide). POST /v2/orders submits a signed maker order — either
-      an ask or a bid — requiring a valid ECDSA signature, nonce values, price
-      in wei, and collection/token details. Seaport-compatible endpoints at
-      /v2/orders/seaport enable listing and bidding through the Seaport protocol
-      while still earning LooksRare rewards and gems.
-    humanURL: https://looksrare.dev/reference/getorders
-    baseURL: https://api.looksrare.org/api
-    tags:
-      - Orders
-      - NFT
-      - Listings
-      - Offers
-      - Seaport
-      - ERC-721
-      - ERC-1155
-    properties:
-      - type: Documentation
-        url: https://looksrare.dev/reference/getorders
-      - type: Documentation
-        title: Create Order Reference
-        url: https://looksrare.dev/reference/createorder
-      - type: OpenAPI
-        url: openapi/looksrare-openapi.json
-
-  - aid: looksrare:events-api
-    name: LooksRare Events API
-    description: >-
-      Retrieve token and order activity events from the LooksRare marketplace
-      including LIST, SALE, OFFER, CANCEL_LIST, and CANCEL_OFFER event types.
-      GET /v2/events supports filtering by collection address, token ID, sender
-      address, receiver address, and event type, with cursor-based pagination
-      (up to 150 results per page). Events are ordered by creation timestamp.
-      The legacy /v1/events endpoint covers historical V1 protocol events,
-      mints, and transfers. Seaport events are available at /v2/events/seaport.
-    humanURL: https://looksrare.dev/reference/getevents
-    baseURL: https://api.looksrare.org/api
-    tags:
-      - Events
-      - NFT
-      - Activity
-      - Sales
-      - Listings
-      - Seaport
-    properties:
-      - type: Documentation
-        url: https://looksrare.dev/reference/getevents
-
-  - aid: looksrare:tokens-api
-    name: LooksRare Tokens API
-    description: >-
-      Retrieve NFT token metadata including token details, collection
-      information, and token attributes for any token indexed by LooksRare.
-      GET /v1/tokens accepts a collection contract address and token ID as
-      required query parameters and returns the full token record including
-      its parent collection metadata and on-chain attribute traits.
-    humanURL: https://looksrare.dev/
-    baseURL: https://api.looksrare.org/api
-    tags:
-      - Tokens
-      - NFT
-      - Metadata
-      - Attributes
-      - Collections
-    properties:
-      - type: Documentation
-        url: https://looksrare.dev/
-
-  - aid: looksrare:collections-api
-    name: LooksRare Collections API
-    description: >-
-      Retrieve collection-level data for NFT collections indexed on LooksRare.
-      Endpoints return Collection objects including logoURI, bannerURI, and
-      collection statistics. The /v2/collections/seaport endpoint checks whether
-      a specific collection is eligible for trading via the LooksRare Seaport
-      integration. Collection data is embedded in token and event responses
-      as well as being available directly.
-    humanURL: https://looksrare.dev/
-    baseURL: https://api.looksrare.org/api
-    tags:
-      - Collections
-      - NFT
-      - Metadata
-      - Statistics
-      - Seaport
-    properties:
-      - type: Documentation
-        url: https://looksrare.dev/
-
+- aid: looksrare:events-api
+  name: LooksRare Events API
+  description: >-
+    Retrieve token and order activity events from the LooksRare marketplace including LIST, SALE, OFFER,
+    CANCEL_LIST, and CANCEL_OFFER event types. GET /v2/events supports filtering by collection address,
+    token ID, sender address, receiver address, and event type, with cursor-based pagination (up to 150
+    results per page). Events are ordered by creation timestamp. The legacy /v1/events endpoint covers
+    historical V1 protocol events, mints, and transfers. Seaport events are available at /v2/events/seaport.
+  humanURL: https://looksrare.dev/reference/getevents
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Events
+  - NFT
+  - Activity
+  - Sales
+  - Listings
+  - Seaport
+  properties:
+  - type: Documentation
+    url: https://looksrare.dev/reference/getevents
+- aid: looksrare:tokens-api
+  name: LooksRare Tokens API
+  description: >-
+    Retrieve NFT token metadata including token details, collection information, and token attributes
+    for any token indexed by LooksRare. GET /v1/tokens accepts a collection contract address and token
+    ID as required query parameters and returns the full token record including its parent collection
+    metadata and on-chain attribute traits.
+  humanURL: https://looksrare.dev/
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Tokens
+  - NFT
+  - Metadata
+  - Attributes
+  - Collections
+  properties:
+  - type: Documentation
+    url: https://looksrare.dev/
+- aid: looksrare:collections-api
+  name: LooksRare Collections API
+  description: >-
+    Retrieve collection-level data for NFT collections indexed on LooksRare. Endpoints return Collection
+    objects including logoURI, bannerURI, and collection statistics. The /v2/collections/seaport endpoint
+    checks whether a specific collection is eligible for trading via the LooksRare Seaport integration.
+    Collection data is embedded in token and event responses as well as being available directly.
+  humanURL: https://looksrare.dev/
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Collections
+  - NFT
+  - Metadata
+  - Statistics
+  - Seaport
+  properties:
+  - type: Documentation
+    url: https://looksrare.dev/
+- aid: looksrare:looksrare-collections-api
+  name: LooksRare Collections API
+  description: Retrieve NFT collection-level metadata, statistics, and integration eligibility.
+  humanURL: https://looksrare.dev/reference/getorders
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/looksrare-collections-api-openapi.yml
+  - type: Documentation
+    url: https://looksrare.dev/reference/getorders
+  - type: Documentation
+    url: https://looksrare.dev/reference/createorder
+- aid: looksrare:looksrare-events-api
+  name: LooksRare Events API
+  description: >-
+    Retrieve token and order activity events from the LooksRare marketplace, including listings, sales,
+    offers, and cancellations.
+  humanURL: https://looksrare.dev/reference/getorders
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/looksrare-events-api-openapi.yml
+  - type: Documentation
+    url: https://looksrare.dev/reference/getorders
+  - type: Documentation
+    url: https://looksrare.dev/reference/createorder
+- aid: looksrare:looksrare-orders-api
+  name: LooksRare Orders API
+  description: >-
+    Read and write NFT maker orders in the LooksRare V2 off-chain order book. Supports both standard (specific
+    token) and collection-wide strategies for asks (listings) and bids (offers).
+  humanURL: https://looksrare.dev/reference/getorders
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/looksrare-orders-api-openapi.yml
+  - type: Documentation
+    url: https://looksrare.dev/reference/getorders
+  - type: Documentation
+    url: https://looksrare.dev/reference/createorder
+- aid: looksrare:looksrare-seaport-api
+  name: LooksRare Seaport API
+  description: >-
+    Endpoints specific to the LooksRare Seaport integration, enabling Seaport-compatible orders and events
+    while earning LooksRare rewards.
+  humanURL: https://looksrare.dev/reference/getorders
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Seaport
+  properties:
+  - type: OpenAPI
+    url: openapi/looksrare-seaport-api-openapi.yml
+  - type: Documentation
+    url: https://looksrare.dev/reference/getorders
+  - type: Documentation
+    url: https://looksrare.dev/reference/createorder
+- aid: looksrare:looksrare-tokens-api
+  name: LooksRare Tokens API
+  description: >-
+    Retrieve NFT token metadata including collection information and on-chain attribute traits.
+  humanURL: https://looksrare.dev/reference/getorders
+  baseURL: https://api.looksrare.org/api
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/looksrare-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://looksrare.dev/reference/getorders
+  - type: Documentation
+    url: https://looksrare.dev/reference/createorder
 common:
   - type: AgenticAccess
     url: agentic-access/looksrare-agentic-access.yml
