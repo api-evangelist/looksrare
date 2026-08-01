@@ -1,0 +1,1279 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "LooksRare Public API",
+    "description": "LooksRare is a community-first NFT marketplace built on Ethereum. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet (https://api.looksrare.org) and the Sepolia testnet (https://api-sepolia.looksrare.org). A mainnet API key is required for write operations such as order creation.",
+    "version": "2.0.0",
+    "contact": {
+      "url": "https://looksrare.dev"
+    },
+    "license": {
+      "name": "Attribution Required",
+      "url": "https://looksrare.dev"
+    },
+    "x-logo": {
+      "url": "https://looksrare.org/favicon.ico"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.looksrare.org/api",
+      "description": "Ethereum Mainnet"
+    },
+    {
+      "url": "https://api-sepolia.looksrare.org/api",
+      "description": "Sepolia Testnet"
+    }
+  ],
+  "security": [],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Looks-Api-Key",
+        "description": "API key required for mainnet write operations (order creation). Not needed for read endpoints or testnet."
+      }
+    },
+    "schemas": {
+      "EthereumAddress": {
+        "type": "string",
+        "pattern": "^0x[a-fA-F0-9]{40}$",
+        "description": "A valid Ethereum contract or wallet address (42 characters including 0x prefix).",
+        "example": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+      },
+      "QuoteType": {
+        "type": "integer",
+        "enum": [0, 1],
+        "description": "Order quote type. 0 = Bid (offer to buy), 1 = Ask (listing to sell)."
+      },
+      "StrategyId": {
+        "type": "integer",
+        "enum": [0, 1],
+        "description": "Maker strategy. 0 = Standard (specific token), 1 = Collection (any token in collection)."
+      },
+      "CollectionType": {
+        "type": "integer",
+        "enum": [0, 1],
+        "description": "NFT collection standard. 0 = ERC-721, 1 = ERC-1155."
+      },
+      "OrderStatus": {
+        "type": "string",
+        "enum": ["VALID", "CANCELLED", "EXECUTED", "EXPIRED"],
+        "description": "Status of an order in the LooksRare order book."
+      },
+      "OrderSort": {
+        "type": "string",
+        "enum": ["PRICE_ASC", "PRICE_DESC", "NEWEST", "EXPIRING_SOON"],
+        "description": "Sort order for order results."
+      },
+      "EventType": {
+        "type": "string",
+        "enum": ["LIST", "SALE", "OFFER", "CANCEL_LIST", "CANCEL_OFFER"],
+        "description": "Type of marketplace event."
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 150,
+            "default": 20,
+            "description": "Number of results to return per page."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "Cursor for pagination. Use the ID of the last result from the previous page."
+          }
+        }
+      },
+      "Collection": {
+        "type": "object",
+        "description": "NFT collection metadata as indexed by LooksRare.",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "name": {
+            "type": "string",
+            "description": "Collection name."
+          },
+          "description": {
+            "type": "string",
+            "description": "Collection description.",
+            "nullable": true
+          },
+          "symbol": {
+            "type": "string",
+            "description": "Collection token symbol.",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "logoURI": {
+            "type": "string",
+            "format": "uri",
+            "description": "URI for the collection logo image.",
+            "nullable": true
+          },
+          "bannerURI": {
+            "type": "string",
+            "format": "uri",
+            "description": "URI for the collection banner image.",
+            "nullable": true
+          },
+          "totalSupply": {
+            "type": "integer",
+            "description": "Total token supply in the collection.",
+            "nullable": true
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Whether the collection is verified by LooksRare."
+          }
+        }
+      },
+      "MakerOrder": {
+        "type": "object",
+        "description": "A maker order (ask or bid) stored in the LooksRare V2 off-chain order book.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique order identifier."
+          },
+          "hash": {
+            "type": "string",
+            "description": "Order hash (keccak256)."
+          },
+          "quoteType": {
+            "$ref": "#/components/schemas/QuoteType"
+          },
+          "globalNonce": {
+            "type": "string",
+            "description": "User's global bid or ask nonce at time of order creation."
+          },
+          "subsetNonce": {
+            "type": "string",
+            "description": "Subset nonce for grouping arbitrary orders."
+          },
+          "orderNonce": {
+            "type": "string",
+            "description": "Specific nonce for this order."
+          },
+          "strategyId": {
+            "$ref": "#/components/schemas/StrategyId"
+          },
+          "collectionType": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "collection": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "signer": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Order validity start timestamp (Unix seconds)."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Order validity end timestamp (Unix seconds)."
+          },
+          "price": {
+            "type": "string",
+            "description": "Order price in wei."
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of token IDs included in the order."
+          },
+          "amounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Amounts per item ID. ERC-721 always 1; ERC-1155 max 100."
+          },
+          "additionalParameters": {
+            "type": "string",
+            "description": "ABI-encoded additional parameters, or '0x' if unused."
+          },
+          "signature": {
+            "type": "string",
+            "description": "ECDSA signature (65 bytes, 0x-prefixed)."
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the order was created."
+          },
+          "merkleRoot": {
+            "type": "string",
+            "nullable": true,
+            "description": "Merkle root for collection-wide orders."
+          },
+          "merkleProof": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "object"
+            },
+            "description": "Merkle proof nodes for collection-wide orders."
+          }
+        }
+      },
+      "CreateOrderRequest": {
+        "type": "object",
+        "required": [
+          "quoteType",
+          "globalNonce",
+          "subsetNonce",
+          "orderNonce",
+          "strategyId",
+          "collectionType",
+          "collection",
+          "currency",
+          "signer",
+          "startTime",
+          "endTime",
+          "price",
+          "itemIds",
+          "amounts",
+          "additionalParameters",
+          "signature"
+        ],
+        "properties": {
+          "quoteType": {
+            "$ref": "#/components/schemas/QuoteType"
+          },
+          "globalNonce": {
+            "type": "string",
+            "description": "User's current global bid/ask nonce. Retrieve via GET /v2/orders/nonce."
+          },
+          "subsetNonce": {
+            "type": "string",
+            "description": "Subset nonce for grouping arbitrary orders (use '0' if not grouping)."
+          },
+          "orderNonce": {
+            "type": "string",
+            "description": "Specific nonce for this individual order."
+          },
+          "strategyId": {
+            "$ref": "#/components/schemas/StrategyId"
+          },
+          "collectionType": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "collection": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/EthereumAddress",
+            "description": "Currency token address. Use zero address (0x000...000) for ETH bids via WETH."
+          },
+          "signer": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "startTime": {
+            "type": "integer",
+            "description": "Order validity start as Unix timestamp (seconds)."
+          },
+          "endTime": {
+            "type": "integer",
+            "description": "Order validity end as Unix timestamp (seconds)."
+          },
+          "price": {
+            "type": "string",
+            "description": "Minimum order price in wei."
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of token IDs. Maximum 1 item for standard strategy."
+          },
+          "amounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Amounts per item. ERC-721 must be '1'; ERC-1155 max '100'."
+          },
+          "additionalParameters": {
+            "type": "string",
+            "description": "ABI-encoded additional parameters hex string. Use '0x' if not applicable."
+          },
+          "signature": {
+            "type": "string",
+            "description": "65-byte ECDSA signature with 0x prefix over the typed order hash."
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "description": "A marketplace activity event on LooksRare.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique event identifier."
+          },
+          "type": {
+            "$ref": "#/components/schemas/EventType"
+          },
+          "collection": {
+            "$ref": "#/components/schemas/Collection"
+          },
+          "token": {
+            "$ref": "#/components/schemas/Token"
+          },
+          "from": {
+            "$ref": "#/components/schemas/EthereumAddress"
+          },
+          "to": {
+            "$ref": "#/components/schemas/EthereumAddress",
+            "nullable": true
+          },
+          "price": {
+            "type": "string",
+            "description": "Sale or offer price in wei.",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the event was recorded."
+          },
+          "hash": {
+            "type": "string",
+            "description": "On-chain transaction hash for settled events.",
+            "nullable": true
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "description": "NFT token metadata as indexed by LooksRare.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Token ID within the collection."
+          },
+          "collection": {
+            "$ref": "#/components/schemas/Collection"
+          },
+          "name": {
+            "type": "string",
+            "description": "Token name.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Token description.",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "description": "Token image URI.",
+            "nullable": true
+          },
+          "animationURI": {
+            "type": "string",
+            "format": "uri",
+            "description": "Token animation or video URI.",
+            "nullable": true
+          },
+          "attributes": {
+            "type": "array",
+            "description": "On-chain attribute traits for this token.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "traitType": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "displayType": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "NonceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "globalBidNonce": {
+                "type": "string",
+                "description": "Current global nonce for bids."
+              },
+              "globalAskNonce": {
+                "type": "string",
+                "description": "Current global nonce for asks."
+              }
+            }
+          }
+        }
+      },
+      "OrderListResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MakerOrder"
+            }
+          }
+        }
+      },
+      "OrderCreateResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/MakerOrder"
+          }
+        }
+      },
+      "EventListResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          }
+        }
+      },
+      "TokenResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Token"
+          }
+        }
+      },
+      "CollectionSeaportResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "eligible": {
+                "type": "boolean",
+                "description": "Whether this collection is eligible for trading via LooksRare Seaport."
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable error message."
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Invalid request parameters.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing or invalid API key.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "RateLimitExceeded": {
+        "description": "Rate limit exceeded.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal server error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/v2/orders/nonce": {
+      "get": {
+        "operationId": "getOrderNonce",
+        "summary": "Get order nonces for an address",
+        "description": "Retrieve the current global bid and ask nonces for a wallet address. These nonces are required when creating new orders via POST /v2/orders.",
+        "tags": ["Orders"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Ethereum wallet address to retrieve nonces for.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nonce values for the given address.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NonceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v2/orders": {
+      "get": {
+        "operationId": "getOrders",
+        "summary": "Get V2 maker orders",
+        "description": "Retrieve V2 maker orders (asks and bids) from the LooksRare off-chain order book with flexible filtering. Supports filtering by quote type, collection, token ID, strategy, signer, and status with cursor-based pagination.",
+        "tags": ["Orders"],
+        "parameters": [
+          {
+            "name": "quoteType",
+            "in": "query",
+            "description": "Filter by quote type: 0 = Bid, 1 = Ask.",
+            "schema": {
+              "$ref": "#/components/schemas/QuoteType"
+            }
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Filter by collection contract address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "Filter by specific token ID. Requires the collection parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "strategyId",
+            "in": "query",
+            "description": "Filter by maker strategy: 0 = Standard, 1 = Collection.",
+            "schema": {
+              "$ref": "#/components/schemas/StrategyId"
+            }
+          },
+          {
+            "name": "signer",
+            "in": "query",
+            "description": "Filter by the Ethereum address of the order signer.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by order status.",
+            "schema": {
+              "$ref": "#/components/schemas/OrderStatus"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort results.",
+            "schema": {
+              "$ref": "#/components/schemas/OrderSort"
+            }
+          },
+          {
+            "name": "pagination[first]",
+            "in": "query",
+            "description": "Number of results per page (default 20, max 150).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 150,
+              "default": 20
+            }
+          },
+          {
+            "name": "pagination[cursor]",
+            "in": "query",
+            "description": "Cursor for pagination; use the ID of the last order from the previous page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of maker orders matching the filters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrder",
+        "summary": "Create a V2 maker order",
+        "description": "Submit a signed maker order (ask or bid) into the LooksRare V2 off-chain order book. Requires a valid ECDSA signature over the typed order hash, current nonce values (from GET /v2/orders/nonce), and price in wei. A mainnet API key is required via the X-Looks-Api-Key header for mainnet submissions.",
+        "tags": ["Orders"],
+        "security": [
+          {
+            "ApiKeyHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequest"
+              },
+              "examples": {
+                "ask": {
+                  "summary": "Standard Ask (Listing)",
+                  "value": {
+                    "quoteType": 1,
+                    "globalNonce": "0",
+                    "subsetNonce": "0",
+                    "orderNonce": "0",
+                    "strategyId": 0,
+                    "collectionType": 0,
+                    "collection": "0x60e4d786628fea6478f785a6d7e704777c86a7c6",
+                    "currency": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                    "signer": "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+                    "startTime": 1680000000,
+                    "endTime": 1682592000,
+                    "price": "1000000000000000000",
+                    "itemIds": ["1234"],
+                    "amounts": ["1"],
+                    "additionalParameters": "0x",
+                    "signature": "0x..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Order successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v2/orders/seaport": {
+      "get": {
+        "operationId": "getSeaportOrders",
+        "summary": "Get LooksRare Seaport orders",
+        "description": "Retrieve maker orders placed through the LooksRare Seaport integration. These orders earn LooksRare rewards and gems while using the Seaport protocol.",
+        "tags": ["Orders", "Seaport"],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Filter by collection contract address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "signer",
+            "in": "query",
+            "description": "Filter by the Ethereum address of the order signer.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "pagination[first]",
+            "in": "query",
+            "description": "Number of results per page (default 20, max 150).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 150,
+              "default": 20
+            }
+          },
+          {
+            "name": "pagination[cursor]",
+            "in": "query",
+            "description": "Cursor for pagination.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Seaport orders.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSeaportOrder",
+        "summary": "Create a LooksRare Seaport order",
+        "description": "Submit a signed Seaport order into the LooksRare order book. Allows listing and bidding through the Seaport protocol while still earning LooksRare rewards and gems.",
+        "tags": ["Orders", "Seaport"],
+        "security": [
+          {
+            "ApiKeyHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Signed Seaport order payload."
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Seaport order successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v2/events": {
+      "get": {
+        "operationId": "getEvents",
+        "summary": "Get V2 marketplace events",
+        "description": "Retrieve token and order activity events from the LooksRare V2 marketplace including LIST, SALE, OFFER, CANCEL_LIST, and CANCEL_OFFER event types. Results are ordered by creation timestamp. For V1 events, mints, and transfers use the /v1/events endpoint.",
+        "tags": ["Events"],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Filter events by collection contract address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "Filter by specific token ID. Requires the collection parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Filter by sender (from) Ethereum address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Filter by receiver (to) Ethereum address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by event type.",
+            "schema": {
+              "$ref": "#/components/schemas/EventType"
+            }
+          },
+          {
+            "name": "pagination[first]",
+            "in": "query",
+            "description": "Number of results per page (default 20, max 150).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 150,
+              "default": 20
+            }
+          },
+          {
+            "name": "pagination[cursor]",
+            "in": "query",
+            "description": "Cursor for pagination; use the ID of the last event from the previous page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of marketplace events matching the filters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/events": {
+      "get": {
+        "operationId": "getV1Events",
+        "summary": "Get V1 marketplace events",
+        "description": "Retrieve historical V1 protocol events including mints, transfers, and legacy order events. Use /v2/events for current marketplace activity.",
+        "tags": ["Events"],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Filter events by collection contract address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "Filter by specific token ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Filter by sender Ethereum address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Filter by receiver Ethereum address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by event type.",
+            "schema": {
+              "type": "string",
+              "enum": ["LIST", "SALE", "OFFER", "CANCEL_LIST", "CANCEL_OFFER", "MINT", "TRANSFER"]
+            }
+          },
+          {
+            "name": "pagination[first]",
+            "in": "query",
+            "description": "Number of results per page (default 20, max 150).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 150,
+              "default": 20
+            }
+          },
+          {
+            "name": "pagination[cursor]",
+            "in": "query",
+            "description": "Cursor for pagination.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of V1 marketplace events.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v2/events/seaport": {
+      "get": {
+        "operationId": "getSeaportEvents",
+        "summary": "Get LooksRare Seaport events",
+        "description": "Retrieve marketplace events for orders executed through the LooksRare Seaport integration.",
+        "tags": ["Events", "Seaport"],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Filter events by collection contract address.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "query",
+            "description": "Filter by specific token ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagination[first]",
+            "in": "query",
+            "description": "Number of results per page (default 20, max 150).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 150,
+              "default": 20
+            }
+          },
+          {
+            "name": "pagination[cursor]",
+            "in": "query",
+            "description": "Cursor for pagination.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Seaport marketplace events.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/tokens": {
+      "get": {
+        "operationId": "getToken",
+        "summary": "Get NFT token metadata",
+        "description": "Retrieve NFT token metadata including token details, parent collection information, and on-chain attribute traits for any token indexed by LooksRare. Both collection and tokenId are required.",
+        "tags": ["Tokens"],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": true,
+            "description": "Collection contract address (Ethereum address).",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          },
+          {
+            "name": "tokenId",
+            "in": "query",
+            "required": true,
+            "description": "Token ID within the collection.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token metadata including collection and attributes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v2/collections/seaport": {
+      "get": {
+        "operationId": "checkCollectionSeaportEligibility",
+        "summary": "Check Seaport eligibility for a collection",
+        "description": "Check whether a specific NFT collection is eligible for trading via the LooksRare Seaport integration.",
+        "tags": ["Collections", "Seaport"],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "required": true,
+            "description": "Collection contract address to check.",
+            "schema": {
+              "$ref": "#/components/schemas/EthereumAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Seaport eligibility status for the collection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionSeaportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Orders",
+      "description": "Read and write NFT maker orders in the LooksRare V2 off-chain order book. Supports both standard (specific token) and collection-wide strategies for asks (listings) and bids (offers)."
+    },
+    {
+      "name": "Events",
+      "description": "Retrieve token and order activity events from the LooksRare marketplace, including listings, sales, offers, and cancellations."
+    },
+    {
+      "name": "Tokens",
+      "description": "Retrieve NFT token metadata including collection information and on-chain attribute traits."
+    },
+    {
+      "name": "Collections",
+      "description": "Retrieve NFT collection-level metadata, statistics, and integration eligibility."
+    },
+    {
+      "name": "Seaport",
+      "description": "Endpoints specific to the LooksRare Seaport integration, enabling Seaport-compatible orders and events while earning LooksRare rewards."
+    }
+  ],
+  "externalDocs": {
+    "description": "LooksRare Developer Documentation",
+    "url": "https://looksrare.dev"
+  }
+}

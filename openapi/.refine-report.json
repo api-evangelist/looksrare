@@ -1,0 +1,22 @@
+{
+  "provider": "looksrare",
+  "sources": [
+    "looksrare-collections-api-openapi.yml",
+    "looksrare-events-api-openapi.yml",
+    "looksrare-orders-api-openapi.yml",
+    "looksrare-seaport-api-openapi.yml",
+    "looksrare-tokens-api-openapi.yml"
+  ],
+  "outputs": [
+    "looksrare-collections-api-openapi.yml",
+    "looksrare-events-api-openapi.yml",
+    "looksrare-orders-api-openapi.yml",
+    "looksrare-seaport-api-openapi.yml",
+    "looksrare-tokens-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
