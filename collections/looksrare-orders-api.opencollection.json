@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LooksRare Public Collections Orders API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get order nonces for an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/orders/nonce",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum wallet address to retrieve nonces for."
+              }
+            ]
+          },
+          "docs": "Retrieve the current global bid and ask nonces for a wallet address. These nonces are required when creating new orders via POST /v2/orders."
+        },
+        {
+          "info": {
+            "name": "Get V2 maker orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/orders",
+            "params": [
+              {
+                "name": "quoteType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by quote type: 0 = Bid, 1 = Ask."
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter by collection contract address."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific token ID. Requires the collection parameter."
+              },
+              {
+                "name": "strategyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by maker strategy: 0 = Standard, 1 = Collection."
+              },
+              {
+                "name": "signer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the Ethereum address of the order signer."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order status."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort results."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination; use the ID of the last order from the previous page."
+              }
+            ]
+          },
+          "docs": "Retrieve V2 maker orders (asks and bids) from the LooksRare off-chain order book with flexible filtering. Supports filtering by quote type, collection, token ID, strategy, signer, and status with cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Create a V2 maker order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.looksrare.org/api/v2/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Looks-Api-Key",
+              "value": "{{X-Looks-Api-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Submit a signed maker order (ask or bid) into the LooksRare V2 off-chain order book. Requires a valid ECDSA signature over the typed order hash, current nonce values (from GET /v2/orders/nonce), and price in wei. A mainnet API key is required via the X-Looks-Api-Key header for mainnet submissions."
+        },
+        {
+          "info": {
+            "name": "Get LooksRare Seaport orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/orders/seaport",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter by collection contract address."
+              },
+              {
+                "name": "signer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the Ethereum address of the order signer."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve maker orders placed through the LooksRare Seaport integration. These orders earn LooksRare rewards and gems while using the Seaport protocol."
+        },
+        {
+          "info": {
+            "name": "Create a LooksRare Seaport order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.looksrare.org/api/v2/orders/seaport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Looks-Api-Key",
+              "value": "{{X-Looks-Api-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Submit a signed Seaport order into the LooksRare order book. Allows listing and bidding through the Seaport protocol while still earning LooksRare rewards and gems."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

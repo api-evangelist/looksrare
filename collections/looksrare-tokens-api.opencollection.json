@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LooksRare Public Collections Tokens API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NFT token metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v1/tokens",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Collection contract address (Ethereum address)."
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "query",
+                "description": "Token ID within the collection."
+              }
+            ]
+          },
+          "docs": "Retrieve NFT token metadata including token details, parent collection information, and on-chain attribute traits for any token indexed by LooksRare. Both collection and tokenId are required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

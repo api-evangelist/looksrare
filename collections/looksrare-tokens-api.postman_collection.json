@@ -1,0 +1,261 @@
+{
+  "item": [
+    {
+      "id": "6db7411f-19d4-4855-b04c-21ab840e897c",
+      "name": "Tokens",
+      "description": {
+        "content": "Retrieve NFT token metadata including collection information and on-chain attribute traits.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "832a2e43-1889-4ada-a55d-5bf5ca0e6928",
+          "name": "Get NFT token metadata",
+          "request": {
+            "name": "Get NFT token metadata",
+            "description": {
+              "content": "Retrieve NFT token metadata including token details, parent collection information, and on-chain attribute traits for any token indexed by LooksRare. Both collection and tokenId are required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "(Required) Collection contract address (Ethereum address)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tokenId",
+                  "value": "<string>",
+                  "description": "(Required) Token ID within the collection."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6a594d2-8029-48ce-a1ba-773faf8580c9",
+              "name": "Token metadata including collection and attributes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "tokenId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"collection\": {\n      \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"symbol\": \"string\",\n      \"type\": 0,\n      \"logoURI\": \"https://MozjGzNegLUGepLEeULcpubOpKrFZHwVL.rvlC3P6zP+6bCya00i0JU+zhXqI77q.wUk.lECt3mtqAh.bwPa.zn\",\n      \"bannerURI\": \"http://ZufOyXmPh.tuyA7CK5BqLqG8BvAq7VCJ5T+A\",\n      \"totalSupply\": 7242,\n      \"verified\": false\n    },\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"image\": \"http://mMURlfAsk.qywsoFvUy\",\n    \"animationURI\": \"http://jeIlqjMvTLuNXFriRWtbg.vinbqcuei22cO\",\n    \"attributes\": [\n      {\n        \"traitType\": \"string\",\n        \"value\": \"string\",\n        \"displayType\": \"string\"\n      },\n      {\n        \"traitType\": \"string\",\n        \"value\": \"string\",\n        \"displayType\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e90da3d9-1583-4aa7-8eff-279f1af71c69",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "tokenId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "303f2ba3-ff96-49ae-899b-c1096b6222c2",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "tokenId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "634c4d1b-1949-45dc-86d2-3634537df463",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "tokenId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.looksrare.org/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "82985ee1-8fb2-4613-be7b-6a2ee60ba91c",
+    "name": "LooksRare Public Collections Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LooksRare is a community-first NFT marketplace built on Ethereum. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet (https://api.looksrare.org) and the Sepolia testnet (https://api-sepolia.looksrare.org). A mainnet API key is required for write operations such as order creation.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LooksRare Public Collections Events API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get V2 marketplace events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/events",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by collection contract address."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific token ID. Requires the collection parameter."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender (from) Ethereum address."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter by receiver (to) Ethereum address."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event type."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination; use the ID of the last event from the previous page."
+              }
+            ]
+          },
+          "docs": "Retrieve token and order activity events from the LooksRare V2 marketplace including LIST, SALE, OFFER, CANCEL_LIST, and CANCEL_OFFER event types. Results are ordered by creation timestamp. For V1 events, mints, and transfers use the /v1/events endpoint."
+        },
+        {
+          "info": {
+            "name": "Get V1 marketplace events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v1/events",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by collection contract address."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific token ID."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Filter by sender Ethereum address."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Filter by receiver Ethereum address."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event type."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve historical V1 protocol events including mints, transfers, and legacy order events. Use /v2/events for current marketplace activity."
+        },
+        {
+          "info": {
+            "name": "Get LooksRare Seaport events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/events/seaport",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by collection contract address."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific token ID."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve marketplace events for orders executed through the LooksRare Seaport integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

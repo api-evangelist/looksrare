@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LooksRare Public Collections Seaport API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Seaport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get LooksRare Seaport orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/orders/seaport",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter by collection contract address."
+              },
+              {
+                "name": "signer",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the Ethereum address of the order signer."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve maker orders placed through the LooksRare Seaport integration. These orders earn LooksRare rewards and gems while using the Seaport protocol."
+        },
+        {
+          "info": {
+            "name": "Create a LooksRare Seaport order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.looksrare.org/api/v2/orders/seaport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Looks-Api-Key",
+              "value": "{{X-Looks-Api-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Submit a signed Seaport order into the LooksRare order book. Allows listing and bidding through the Seaport protocol while still earning LooksRare rewards and gems."
+        },
+        {
+          "info": {
+            "name": "Get LooksRare Seaport events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/events/seaport",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by collection contract address."
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific token ID."
+              },
+              {
+                "name": "pagination[first]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default 20, max 150)."
+              },
+              {
+                "name": "pagination[cursor]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve marketplace events for orders executed through the LooksRare Seaport integration."
+        },
+        {
+          "info": {
+            "name": "Check Seaport eligibility for a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/collections/seaport",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Collection contract address to check."
+              }
+            ]
+          },
+          "docs": "Check whether a specific NFT collection is eligible for trading via the LooksRare Seaport integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1131 @@
+{
+  "item": [
+    {
+      "id": "4f0a1778-5d86-4d82-9cae-c6d5b82efd16",
+      "name": "Seaport",
+      "description": {
+        "content": "Endpoints specific to the LooksRare Seaport integration, enabling Seaport-compatible orders and events while earning LooksRare rewards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e0c7264-4f2a-40a1-8c5e-69030f4676e0",
+          "name": "Get LooksRare Seaport orders",
+          "request": {
+            "name": "Get LooksRare Seaport orders",
+            "description": {
+              "content": "Retrieve maker orders placed through the LooksRare Seaport integration. These orders earn LooksRare rewards and gems while using the Seaport protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "signer",
+                  "value": "<string>",
+                  "description": "Filter by the Ethereum address of the order signer."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2299066-667e-4919-8207-a3eb9fe02ddd",
+              "name": "List of Seaport orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"hash\": \"string\",\n      \"quoteType\": 1,\n      \"globalNonce\": \"string\",\n      \"subsetNonce\": \"string\",\n      \"orderNonce\": \"string\",\n      \"strategyId\": 0,\n      \"collectionType\": 0,\n      \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"startTime\": 4064,\n      \"endTime\": 4107,\n      \"price\": \"string\",\n      \"itemIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"amounts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"additionalParameters\": \"string\",\n      \"signature\": \"string\",\n      \"status\": \"EXPIRED\",\n      \"createdAt\": \"2014-02-12T01:37:17.339Z\",\n      \"merkleRoot\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"hash\": \"string\",\n      \"quoteType\": 1,\n      \"globalNonce\": \"string\",\n      \"subsetNonce\": \"string\",\n      \"orderNonce\": \"string\",\n      \"strategyId\": 1,\n      \"collectionType\": 0,\n      \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"startTime\": 5981,\n      \"endTime\": 8157,\n      \"price\": \"string\",\n      \"itemIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"amounts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"additionalParameters\": \"string\",\n      \"signature\": \"string\",\n      \"status\": \"CANCELLED\",\n      \"createdAt\": \"1952-02-18T10:31:25.259Z\",\n      \"merkleRoot\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e62ad8d-3d1c-4acb-865f-77b410fb166c",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "305aa93a-d656-4738-854c-d9bf3b9de830",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aa4dd6a-8f7a-4012-a433-ba7ead869399",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dc2c5be-e3bc-43ef-bafa-89b16613ba71",
+          "name": "Create a LooksRare Seaport order",
+          "request": {
+            "name": "Create a LooksRare Seaport order",
+            "description": {
+              "content": "Submit a signed Seaport order into the LooksRare order book. Allows listing and bidding through the Seaport protocol while still earning LooksRare rewards and gems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Looks-Api-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5af0fba-7355-4e6e-98ea-6b6c92a692ae",
+              "name": "Seaport order successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"hash\": \"string\",\n    \"quoteType\": 1,\n    \"globalNonce\": \"string\",\n    \"subsetNonce\": \"string\",\n    \"orderNonce\": \"string\",\n    \"strategyId\": 0,\n    \"collectionType\": 0,\n    \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"startTime\": 5846,\n    \"endTime\": 1657,\n    \"price\": \"string\",\n    \"itemIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"amounts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"additionalParameters\": \"string\",\n    \"signature\": \"string\",\n    \"status\": \"CANCELLED\",\n    \"createdAt\": \"2004-05-09T01:02:17.430Z\",\n    \"merkleRoot\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21f49c41-3599-4d81-94d5-5bcf0e062c75",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b57a9581-2231-47f1-aec9-9455f4eb9f7b",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6deb6cf4-3cbe-40a3-abb7-fe25223ee0fa",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0902db68-dc0f-46be-aa88-f0f94357ca3e",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6282bb3c-56d1-4b2f-82c1-7ec2d2a9c585",
+          "name": "Get LooksRare Seaport events",
+          "request": {
+            "name": "Get LooksRare Seaport events",
+            "description": {
+              "content": "Retrieve marketplace events for orders executed through the LooksRare Seaport integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "events",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter events by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Filter by specific token ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bae9c169-c7dd-4dd5-b735-4deaacff1a04",
+              "name": "List of Seaport marketplace events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"CANCEL_OFFER\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"https://RdSEtVaUXJYSqRCVfBpMy.ksscUCfwPu\",\n        \"bannerURI\": \"https://NnMhRJNkDMHhzrShaiEvwtvanTH.prkgQT6hufowuhwi6SAKXeiFlurh2o.fR7N\",\n        \"totalSupply\": 2135,\n        \"verified\": true\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"http://oSIxdMDDeXxC.qsqCy9pN0-klefDymgFc9KHN6KhcTqaTsEBu\",\n          \"bannerURI\": \"http://KXLdNATlkpMwckDuVBSMafoOdjfSU.nahg1fyiCbDzDPAL3s6L5I1OmJOQc433,CXqvJ0dXta68\",\n          \"totalSupply\": 9864,\n          \"verified\": false\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"http://CHgioavclUOsS.xbehHCOALCWcr05uemCs6+7nioFU\",\n        \"animationURI\": \"https://rCxWOjqLLjxBXhlIGppIuOIuGxFS.zptj6E8JIXiThNnejFy5QdxBBN,UWegIYklK9JX0R9EHIjCAyW1oR,aty\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"2008-04-13T17:16:11.085Z\",\n      \"hash\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"LIST\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 0,\n        \"logoURI\": \"https://MJhLiExOIKItH.jhwOtAEVOxmnKnQrxSrPQvFR,i6W.+W.rur0GdEWzcoQdczOoMymh\",\n        \"bannerURI\": \"https://ltxqbL.rrgrCKNtSpgIEAAMWuvUP8f4rrGkn-Ilfdpjeqn--5eQ\",\n        \"totalSupply\": 1466,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"http://mbHNl.xah15C8X+1hlfPpSt3MNcoVyXnT9WBOAD7etlA7x.j6NG0NIZ+rqPQ2ePQFQEFBNGwj-lk11EIZdHj2\",\n          \"bannerURI\": \"http://jjd.ekzQl7XhtLV+ovPh1DRcH8jMGBfmT-U.-naZnp2XmjtVHIes9n+soesRsBjNyzvNEVJ3eZxv\",\n          \"totalSupply\": 4292,\n          \"verified\": true\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"http://yGEybKEUYxhPLgHzlAslPbXGzz.hwbkH4u2yLi9WUTIp6GEDsgbX1+0wq6qBvfiYvw1G3MUeYdLt5qjJ9i1\",\n        \"animationURI\": \"https://PiFAwZUe.wjaQRdmphmeUnIZUYeBN3kWDth.GAvctdsbSM-B9QG4\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"1996-04-01T18:36:55.427Z\",\n      \"hash\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85b9bb17-207a-403a-b149-199d0120bc22",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49cca0f8-7afc-4896-abd9-676b4c570b90",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5eb8129e-e217-4cad-825b-92c6d13cefd9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5594530-1c5e-42eb-8ada-4eb466926e9d",
+          "name": "Check Seaport eligibility for a collection",
+          "request": {
+            "name": "Check Seaport eligibility for a collection",
+            "description": {
+              "content": "Check whether a specific NFT collection is eligible for trading via the LooksRare Seaport integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "collections",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "(Required) Collection contract address to check."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e9c3290-1f44-4468-9289-6093e3e38934",
+              "name": "Seaport eligibility status for the collection.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collections",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"eligible\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75fe055a-6dd2-4eec-b2d7-2af5a9b8548d",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collections",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83a609d8-2181-4b2b-a413-dd6297b2846e",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collections",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08508d65-0f25-49fd-b7bb-e02bb067012c",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "collections",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.looksrare.org/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0d1cbd4b-47fe-41db-a6af-2ef5e3595bc0",
+    "name": "LooksRare Public Collections Seaport API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LooksRare is a community-first NFT marketplace built on Ethereum. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet (https://api.looksrare.org) and the Sepolia testnet (https://api-sepolia.looksrare.org). A mainnet API key is required for write operations such as order creation.",
+      "type": "text/plain"
+    }
+  }
+}

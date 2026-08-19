@@ -1,0 +1,1561 @@
+{
+  "item": [
+    {
+      "id": "0a6f04b9-c1d4-4fd0-8d8f-544189cbaafd",
+      "name": "Orders",
+      "description": {
+        "content": "Read and write NFT maker orders in the LooksRare V2 off-chain order book. Supports both standard (specific token) and collection-wide strategies for asks (listings) and bids (offers).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f76f20d-8ce5-4b02-9900-6d2c10c6f997",
+          "name": "Get order nonces for an address",
+          "request": {
+            "name": "Get order nonces for an address",
+            "description": {
+              "content": "Retrieve the current global bid and ask nonces for a wallet address. These nonces are required when creating new orders via POST /v2/orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                "nonce"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Ethereum wallet address to retrieve nonces for."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "788713f9-5cca-41d5-ac02-3235948dbe56",
+              "name": "Nonce values for the given address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"globalBidNonce\": \"string\",\n    \"globalAskNonce\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93713e2a-785d-4454-b6db-3324b398d90f",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "545cf8c8-73a9-4093-858d-ced379576d62",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85c0cd54-1643-415c-9df1-a5f59f45d447",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa7cd1a7-df0f-4d65-9c31-5eaf5e935d1d",
+          "name": "Get V2 maker orders",
+          "request": {
+            "name": "Get V2 maker orders",
+            "description": {
+              "content": "Retrieve V2 maker orders (asks and bids) from the LooksRare off-chain order book with flexible filtering. Supports filtering by quote type, collection, token ID, strategy, signer, and status with cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "quoteType",
+                  "value": "<integer>",
+                  "description": "Filter by quote type: 0 = Bid, 1 = Ask."
+                },
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Filter by specific token ID. Requires the collection parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "strategyId",
+                  "value": "<integer>",
+                  "description": "Filter by maker strategy: 0 = Standard, 1 = Collection."
+                },
+                {
+                  "disabled": false,
+                  "key": "signer",
+                  "value": "<string>",
+                  "description": "Filter by the Ethereum address of the order signer."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by order status."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort results."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination; use the ID of the last order from the previous page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c5a05f8-d690-4d98-b03c-715fe11ea26a",
+              "name": "List of maker orders matching the filters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteType",
+                      "value": "0"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "strategyId",
+                      "value": "0"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "status",
+                      "value": "VALID"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "EXPIRING_SOON"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"hash\": \"string\",\n      \"quoteType\": 1,\n      \"globalNonce\": \"string\",\n      \"subsetNonce\": \"string\",\n      \"orderNonce\": \"string\",\n      \"strategyId\": 0,\n      \"collectionType\": 0,\n      \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"startTime\": 759,\n      \"endTime\": 6879,\n      \"price\": \"string\",\n      \"itemIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"amounts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"additionalParameters\": \"string\",\n      \"signature\": \"string\",\n      \"status\": \"EXECUTED\",\n      \"createdAt\": \"2020-08-31T12:13:32.566Z\",\n      \"merkleRoot\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"hash\": \"string\",\n      \"quoteType\": 1,\n      \"globalNonce\": \"string\",\n      \"subsetNonce\": \"string\",\n      \"orderNonce\": \"string\",\n      \"strategyId\": 1,\n      \"collectionType\": 1,\n      \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"startTime\": 266,\n      \"endTime\": 5672,\n      \"price\": \"string\",\n      \"itemIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"amounts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"additionalParameters\": \"string\",\n      \"signature\": \"string\",\n      \"status\": \"EXECUTED\",\n      \"createdAt\": \"1989-08-21T09:09:42.849Z\",\n      \"merkleRoot\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c3511ab-da58-4847-849f-63ec1cd5c7b8",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteType",
+                      "value": "0"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "strategyId",
+                      "value": "0"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "status",
+                      "value": "VALID"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "EXPIRING_SOON"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b1f961d-9f09-43dc-b70c-b32fb8936c61",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteType",
+                      "value": "1"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "strategyId",
+                      "value": "0"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "status",
+                      "value": "VALID"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "EXPIRING_SOON"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22b7cb62-eac5-413f-a193-a3d00af1b197",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "quoteType",
+                      "value": "1"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "strategyId",
+                      "value": "0"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "status",
+                      "value": "VALID"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "EXPIRING_SOON"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7ee4486-2b2d-4902-83b1-e0b7c191d39d",
+          "name": "Create a V2 maker order",
+          "request": {
+            "name": "Create a V2 maker order",
+            "description": {
+              "content": "Submit a signed maker order (ask or bid) into the LooksRare V2 off-chain order book. Requires a valid ECDSA signature over the typed order hash, current nonce values (from GET /v2/orders/nonce), and price in wei. A mainnet API key is required via the X-Looks-Api-Key header for mainnet submissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Looks-Api-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quoteType\": \"<integer>\",\n  \"globalNonce\": \"<string>\",\n  \"subsetNonce\": \"<string>\",\n  \"orderNonce\": \"<string>\",\n  \"strategyId\": \"<integer>\",\n  \"collectionType\": \"<integer>\",\n  \"collection\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"signer\": \"<string>\",\n  \"startTime\": \"<integer>\",\n  \"endTime\": \"<integer>\",\n  \"price\": \"<string>\",\n  \"itemIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additionalParameters\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "00f6add1-17e6-4881-8e58-698f172817c6",
+              "name": "Order successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteType\": 1,\n  \"globalNonce\": \"0\",\n  \"subsetNonce\": \"0\",\n  \"orderNonce\": \"0\",\n  \"strategyId\": 0,\n  \"collectionType\": 0,\n  \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n  \"currency\": \"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2\",\n  \"signer\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n  \"startTime\": 1680000000,\n  \"endTime\": 1682592000,\n  \"price\": \"1000000000000000000\",\n  \"itemIds\": [\n    \"1234\"\n  ],\n  \"amounts\": [\n    \"1\"\n  ],\n  \"additionalParameters\": \"0x\",\n  \"signature\": \"0x...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"hash\": \"string\",\n    \"quoteType\": 0,\n    \"globalNonce\": \"string\",\n    \"subsetNonce\": \"string\",\n    \"orderNonce\": \"string\",\n    \"strategyId\": 1,\n    \"collectionType\": 0,\n    \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"startTime\": 103,\n    \"endTime\": 8501,\n    \"price\": \"string\",\n    \"itemIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"amounts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"additionalParameters\": \"string\",\n    \"signature\": \"string\",\n    \"status\": \"EXPIRED\",\n    \"createdAt\": \"1992-10-17T21:46:40.673Z\",\n    \"merkleRoot\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74e22f81-99de-4c02-8873-2bb07cddf4be",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteType\": 1,\n  \"globalNonce\": \"0\",\n  \"subsetNonce\": \"0\",\n  \"orderNonce\": \"0\",\n  \"strategyId\": 0,\n  \"collectionType\": 0,\n  \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n  \"currency\": \"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2\",\n  \"signer\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n  \"startTime\": 1680000000,\n  \"endTime\": 1682592000,\n  \"price\": \"1000000000000000000\",\n  \"itemIds\": [\n    \"1234\"\n  ],\n  \"amounts\": [\n    \"1\"\n  ],\n  \"additionalParameters\": \"0x\",\n  \"signature\": \"0x...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b4c4264-3b09-423e-b16b-f37b2afe7e82",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteType\": 1,\n  \"globalNonce\": \"0\",\n  \"subsetNonce\": \"0\",\n  \"orderNonce\": \"0\",\n  \"strategyId\": 0,\n  \"collectionType\": 0,\n  \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n  \"currency\": \"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2\",\n  \"signer\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n  \"startTime\": 1680000000,\n  \"endTime\": 1682592000,\n  \"price\": \"1000000000000000000\",\n  \"itemIds\": [\n    \"1234\"\n  ],\n  \"amounts\": [\n    \"1\"\n  ],\n  \"additionalParameters\": \"0x\",\n  \"signature\": \"0x...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24090a5b-5f8f-494b-ae3f-363fb5bcab17",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteType\": 1,\n  \"globalNonce\": \"0\",\n  \"subsetNonce\": \"0\",\n  \"orderNonce\": \"0\",\n  \"strategyId\": 0,\n  \"collectionType\": 0,\n  \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n  \"currency\": \"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2\",\n  \"signer\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n  \"startTime\": 1680000000,\n  \"endTime\": 1682592000,\n  \"price\": \"1000000000000000000\",\n  \"itemIds\": [\n    \"1234\"\n  ],\n  \"amounts\": [\n    \"1\"\n  ],\n  \"additionalParameters\": \"0x\",\n  \"signature\": \"0x...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7810a902-c038-40b3-b3df-f30ee9abe076",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteType\": 1,\n  \"globalNonce\": \"0\",\n  \"subsetNonce\": \"0\",\n  \"orderNonce\": \"0\",\n  \"strategyId\": 0,\n  \"collectionType\": 0,\n  \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n  \"currency\": \"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2\",\n  \"signer\": \"0xabcdefabcdefabcdefabcdefabcdefabcdefabcd\",\n  \"startTime\": 1680000000,\n  \"endTime\": 1682592000,\n  \"price\": \"1000000000000000000\",\n  \"itemIds\": [\n    \"1234\"\n  ],\n  \"amounts\": [\n    \"1\"\n  ],\n  \"additionalParameters\": \"0x\",\n  \"signature\": \"0x...\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02f0bb03-4b89-4fe5-92b2-36f028efdd50",
+          "name": "Get LooksRare Seaport orders",
+          "request": {
+            "name": "Get LooksRare Seaport orders",
+            "description": {
+              "content": "Retrieve maker orders placed through the LooksRare Seaport integration. These orders earn LooksRare rewards and gems while using the Seaport protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "signer",
+                  "value": "<string>",
+                  "description": "Filter by the Ethereum address of the order signer."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66f9e2f1-b257-4779-885c-9eefe527894d",
+              "name": "List of Seaport orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"hash\": \"string\",\n      \"quoteType\": 1,\n      \"globalNonce\": \"string\",\n      \"subsetNonce\": \"string\",\n      \"orderNonce\": \"string\",\n      \"strategyId\": 0,\n      \"collectionType\": 0,\n      \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"startTime\": 759,\n      \"endTime\": 6879,\n      \"price\": \"string\",\n      \"itemIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"amounts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"additionalParameters\": \"string\",\n      \"signature\": \"string\",\n      \"status\": \"EXECUTED\",\n      \"createdAt\": \"2020-08-31T12:13:32.566Z\",\n      \"merkleRoot\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"hash\": \"string\",\n      \"quoteType\": 1,\n      \"globalNonce\": \"string\",\n      \"subsetNonce\": \"string\",\n      \"orderNonce\": \"string\",\n      \"strategyId\": 1,\n      \"collectionType\": 1,\n      \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"startTime\": 266,\n      \"endTime\": 5672,\n      \"price\": \"string\",\n      \"itemIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"amounts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"additionalParameters\": \"string\",\n      \"signature\": \"string\",\n      \"status\": \"EXECUTED\",\n      \"createdAt\": \"1989-08-21T09:09:42.849Z\",\n      \"merkleRoot\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c2fc8e3-065e-4c20-9037-ada3b07f9603",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cb78db0-9f84-4e52-bf41-2b7829c4e8ad",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8502c9ca-4ace-4d16-b8ab-f02b7a55f3c4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "signer",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da9135f7-2a63-480a-b3c5-85b01315570a",
+          "name": "Create a LooksRare Seaport order",
+          "request": {
+            "name": "Create a LooksRare Seaport order",
+            "description": {
+              "content": "Submit a signed Seaport order into the LooksRare order book. Allows listing and bidding through the Seaport protocol while still earning LooksRare rewards and gems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Looks-Api-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f8c47f7-1a7e-44a6-8a8d-0a2ade46072e",
+              "name": "Seaport order successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"hash\": \"string\",\n    \"quoteType\": 0,\n    \"globalNonce\": \"string\",\n    \"subsetNonce\": \"string\",\n    \"orderNonce\": \"string\",\n    \"strategyId\": 1,\n    \"collectionType\": 0,\n    \"collection\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"currency\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"signer\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n    \"startTime\": 103,\n    \"endTime\": 8501,\n    \"price\": \"string\",\n    \"itemIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"amounts\": [\n      \"string\",\n      \"string\"\n    ],\n    \"additionalParameters\": \"string\",\n    \"signature\": \"string\",\n    \"status\": \"EXPIRED\",\n    \"createdAt\": \"1992-10-17T21:46:40.673Z\",\n    \"merkleRoot\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "702e46c6-eed8-4944-99a6-784bd9de83a6",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d764bfc3-d77a-4de5-889b-f4d97e585f87",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e72ce914-a272-4c04-98de-545af76c271e",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f77734b3-c6ce-4499-b9d6-890887052dd7",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Looks-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.looksrare.org/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3fe4db6f-5b39-4bde-aa69-ec9836d523c0",
+    "name": "LooksRare Public Collections Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LooksRare is a community-first NFT marketplace built on Ethereum. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet (https://api.looksrare.org) and the Sepolia testnet (https://api-sepolia.looksrare.org). A mainnet API key is required for write operations such as order creation.",
+      "type": "text/plain"
+    }
+  }
+}

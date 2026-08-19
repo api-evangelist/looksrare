@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LooksRare Public Collections API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Seaport eligibility for a collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.looksrare.org/api/v2/collections/seaport",
+            "params": [
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query",
+                "description": "Collection contract address to check."
+              }
+            ]
+          },
+          "docs": "Check whether a specific NFT collection is eligible for trading via the LooksRare Seaport integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

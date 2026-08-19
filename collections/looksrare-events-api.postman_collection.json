@@ -1,0 +1,988 @@
+{
+  "item": [
+    {
+      "id": "73fb3d0a-6760-4981-92f2-f6bc40823997",
+      "name": "Events",
+      "description": {
+        "content": "Retrieve token and order activity events from the LooksRare marketplace, including listings, sales, offers, and cancellations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7833d58e-deef-4fa8-8bac-5326cf9404a9",
+          "name": "Get V2 marketplace events",
+          "request": {
+            "name": "Get V2 marketplace events",
+            "description": {
+              "content": "Retrieve token and order activity events from the LooksRare V2 marketplace including LIST, SALE, OFFER, CANCEL_LIST, and CANCEL_OFFER event types. Results are ordered by creation timestamp. For V1 events, mints, and transfers use the /v1/events endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter events by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Filter by specific token ID. Requires the collection parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "Filter by sender (from) Ethereum address."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "Filter by receiver (to) Ethereum address."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by event type."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination; use the ID of the last event from the previous page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "976f63f4-75cb-4df9-91c0-786eb42a2f40",
+              "name": "List of marketplace events matching the filters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "SALE"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"CANCEL_OFFER\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"http://TUtmbbIxgKZiBEQEzKAtK.foiahFWoPVhVEwVzuTfVCViBK8d6azEztJIiQlDb++LTQV\",\n        \"bannerURI\": \"http://gCSgtaHpwcAAyJOXfbTjJ.mykmb6EtQ9EQZlvMj2rlf0KvGLpBtOLE5nGz-BdZqlUC8YY03QXsHgL\",\n        \"totalSupply\": 366,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"https://X.cpvC+wRSDzNHxlHeTOvxvpo8xnq-RuiYoYzTiGM9WutliTG2Ql\",\n          \"bannerURI\": \"https://UJTF.qjla2V4SXQt.KHs.FoQB2G1iW+ixQJzJpIiAGCIfeR\",\n          \"totalSupply\": 1151,\n          \"verified\": false\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"http://OFCxnOsgpwygUGpEpkpYXqICs.sddexJzh9uXWLuzyzejnL\",\n        \"animationURI\": \"http://gNEtSbEiffCeVbyvrXAo.ckeqonEhW8uRDop\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"1961-09-18T02:20:48.542Z\",\n      \"hash\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"SALE\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"https://TKWFlIedyIvfgwvAtvFtAmOfPVGwaOy.qumisviUV4GQMEnmswUfmhLEqQ2EXvAyW1PJf-EOiUlU-E6H.-7wr\",\n        \"bannerURI\": \"http://tDmRcVgustvjqMSZsUhrXQSJTDIx.rmpiar8dK6R0KrHwNwuSODCB0UEg3UG-YlO874MUm6X-jyvg0f,gNYZQm5UZPj4\",\n        \"totalSupply\": 8563,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"http://WowVgnhxav.vqykuiaFPS7l5Lkzizyg.eRm+Ip\",\n          \"bannerURI\": \"http://OQlPSyZBi.plhbYcv-vlB4wGBG6IoYL3IaKP9VW5T-TbrO,M0oLh9kMH9svGzWQns51UWhJOsE8\",\n          \"totalSupply\": 9134,\n          \"verified\": true\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"https://ClA.yehxnPK8UILDENaWl8DG\",\n        \"animationURI\": \"https://WeUjzPPGvEUNztzkccKYYpwBsndBT.zuoAidN4Zln3i8A72Sc8qIb7aKM2mKCYpHH+R9eZogrwtxllgpA-gKIPK-\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"2019-09-05T22:05:51.163Z\",\n      \"hash\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bee5ccc0-d261-4505-b7c2-bf8019c3e7b6",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "SALE"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cf0ddee-1b5f-433d-a201-4680595176e3",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "SALE"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b26070-61ae-4798-9668-f71039ee8781",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "SALE"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21b6c280-0459-4c40-8d4b-18cc94b08919",
+          "name": "Get V1 marketplace events",
+          "request": {
+            "name": "Get V1 marketplace events",
+            "description": {
+              "content": "Retrieve historical V1 protocol events including mints, transfers, and legacy order events. Use /v2/events for current marketplace activity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter events by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Filter by specific token ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "Filter by sender Ethereum address."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "Filter by receiver Ethereum address."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by event type."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10ba4f45-feb7-45ee-893c-da90a453d60c",
+              "name": "List of V1 marketplace events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"CANCEL_OFFER\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"http://TUtmbbIxgKZiBEQEzKAtK.foiahFWoPVhVEwVzuTfVCViBK8d6azEztJIiQlDb++LTQV\",\n        \"bannerURI\": \"http://gCSgtaHpwcAAyJOXfbTjJ.mykmb6EtQ9EQZlvMj2rlf0KvGLpBtOLE5nGz-BdZqlUC8YY03QXsHgL\",\n        \"totalSupply\": 366,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"https://X.cpvC+wRSDzNHxlHeTOvxvpo8xnq-RuiYoYzTiGM9WutliTG2Ql\",\n          \"bannerURI\": \"https://UJTF.qjla2V4SXQt.KHs.FoQB2G1iW+ixQJzJpIiAGCIfeR\",\n          \"totalSupply\": 1151,\n          \"verified\": false\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"http://OFCxnOsgpwygUGpEpkpYXqICs.sddexJzh9uXWLuzyzejnL\",\n        \"animationURI\": \"http://gNEtSbEiffCeVbyvrXAo.ckeqonEhW8uRDop\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"1961-09-18T02:20:48.542Z\",\n      \"hash\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"SALE\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"https://TKWFlIedyIvfgwvAtvFtAmOfPVGwaOy.qumisviUV4GQMEnmswUfmhLEqQ2EXvAyW1PJf-EOiUlU-E6H.-7wr\",\n        \"bannerURI\": \"http://tDmRcVgustvjqMSZsUhrXQSJTDIx.rmpiar8dK6R0KrHwNwuSODCB0UEg3UG-YlO874MUm6X-jyvg0f,gNYZQm5UZPj4\",\n        \"totalSupply\": 8563,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"http://WowVgnhxav.vqykuiaFPS7l5Lkzizyg.eRm+Ip\",\n          \"bannerURI\": \"http://OQlPSyZBi.plhbYcv-vlB4wGBG6IoYL3IaKP9VW5T-TbrO,M0oLh9kMH9svGzWQns51UWhJOsE8\",\n          \"totalSupply\": 9134,\n          \"verified\": true\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"https://ClA.yehxnPK8UILDENaWl8DG\",\n        \"animationURI\": \"https://WeUjzPPGvEUNztzkccKYYpwBsndBT.zuoAidN4Zln3i8A72Sc8qIb7aKM2mKCYpHH+R9eZogrwtxllgpA-gKIPK-\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"2019-09-05T22:05:51.163Z\",\n      \"hash\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "080ee563-7c80-4844-aedd-ebd2eee6b618",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eedf9f8f-ab00-4315-bc1f-a5d64742376c",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b35f249-921f-4c1c-9bdd-b67d051bc8bd",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "to",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a84d832-2d9a-4f13-9c73-dc8c3d636574",
+          "name": "Get LooksRare Seaport events",
+          "request": {
+            "name": "Get LooksRare Seaport events",
+            "description": {
+              "content": "Retrieve marketplace events for orders executed through the LooksRare Seaport integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "events",
+                "seaport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<string>",
+                  "description": "Filter events by collection contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "itemId",
+                  "value": "<string>",
+                  "description": "Filter by specific token ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[first]",
+                  "value": "20",
+                  "description": "Number of results per page (default 20, max 150)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination[cursor]",
+                  "value": "<string>",
+                  "description": "Cursor for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7180202-82cb-4490-b9e2-eecc53813ce6",
+              "name": "List of Seaport marketplace events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"CANCEL_OFFER\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"http://TUtmbbIxgKZiBEQEzKAtK.foiahFWoPVhVEwVzuTfVCViBK8d6azEztJIiQlDb++LTQV\",\n        \"bannerURI\": \"http://gCSgtaHpwcAAyJOXfbTjJ.mykmb6EtQ9EQZlvMj2rlf0KvGLpBtOLE5nGz-BdZqlUC8YY03QXsHgL\",\n        \"totalSupply\": 366,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"https://X.cpvC+wRSDzNHxlHeTOvxvpo8xnq-RuiYoYzTiGM9WutliTG2Ql\",\n          \"bannerURI\": \"https://UJTF.qjla2V4SXQt.KHs.FoQB2G1iW+ixQJzJpIiAGCIfeR\",\n          \"totalSupply\": 1151,\n          \"verified\": false\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"http://OFCxnOsgpwygUGpEpkpYXqICs.sddexJzh9uXWLuzyzejnL\",\n        \"animationURI\": \"http://gNEtSbEiffCeVbyvrXAo.ckeqonEhW8uRDop\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"1961-09-18T02:20:48.542Z\",\n      \"hash\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"SALE\",\n      \"collection\": {\n        \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"symbol\": \"string\",\n        \"type\": 1,\n        \"logoURI\": \"https://TKWFlIedyIvfgwvAtvFtAmOfPVGwaOy.qumisviUV4GQMEnmswUfmhLEqQ2EXvAyW1PJf-EOiUlU-E6H.-7wr\",\n        \"bannerURI\": \"http://tDmRcVgustvjqMSZsUhrXQSJTDIx.rmpiar8dK6R0KrHwNwuSODCB0UEg3UG-YlO874MUm6X-jyvg0f,gNYZQm5UZPj4\",\n        \"totalSupply\": 8563,\n        \"verified\": false\n      },\n      \"token\": {\n        \"id\": \"string\",\n        \"collection\": {\n          \"address\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n          \"name\": \"string\",\n          \"description\": \"string\",\n          \"symbol\": \"string\",\n          \"type\": 0,\n          \"logoURI\": \"http://WowVgnhxav.vqykuiaFPS7l5Lkzizyg.eRm+Ip\",\n          \"bannerURI\": \"http://OQlPSyZBi.plhbYcv-vlB4wGBG6IoYL3IaKP9VW5T-TbrO,M0oLh9kMH9svGzWQns51UWhJOsE8\",\n          \"totalSupply\": 9134,\n          \"verified\": true\n        },\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"image\": \"https://ClA.yehxnPK8UILDENaWl8DG\",\n        \"animationURI\": \"https://WeUjzPPGvEUNztzkccKYYpwBsndBT.zuoAidN4Zln3i8A72Sc8qIb7aKM2mKCYpHH+R9eZogrwtxllgpA-gKIPK-\",\n        \"attributes\": [\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          },\n          {\n            \"traitType\": \"string\",\n            \"value\": \"string\",\n            \"displayType\": \"string\"\n          }\n        ]\n      },\n      \"from\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"to\": \"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\n      \"price\": \"string\",\n      \"createdAt\": \"2019-09-05T22:05:51.163Z\",\n      \"hash\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30da87c0-c6ef-4eba-a2c8-c0922e3bcd56",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "faa633a8-f777-47bd-8ad8-579e12f0883b",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32015144-efc0-450c-b3eb-b6598339d5c3",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "events",
+                    "seaport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collection",
+                      "value": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                    },
+                    {
+                      "key": "itemId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination[first]",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pagination[cursor]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.looksrare.org/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d46288ec-be5a-4b05-89de-69f0779a6c2f",
+    "name": "LooksRare Public Collections Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "LooksRare is a community-first NFT marketplace built on Ethereum. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet (https://api.looksrare.org) and the Sepolia testnet (https://api-sepolia.looksrare.org). A mainnet API key is required for write operations such as order creation.",
+      "type": "text/plain"
+    }
+  }
+}
