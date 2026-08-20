@@ -31,6 +31,19 @@ tags:
   - Marketplace
   - Ethereum
   - Web3
+  - Order
+  - Collection
+  - Tokens
+  - Event
+  - ERC-721
+  - ERC-1155
+  - Seaport
+  - Community
+tags_raw:
+  - NFT
+  - Marketplace
+  - Ethereum
+  - Web3
   - Orders
   - Collections
   - Tokens
@@ -58,6 +71,13 @@ apis:
   humanURL: https://looksrare.dev/reference/getevents
   baseURL: https://api.looksrare.org/api
   tags:
+  - Event
+  - NFT
+  - Activity
+  - Sales
+  - Listings
+  - Seaport
+  tags_raw:
   - Events
   - NFT
   - Activity
@@ -81,6 +101,12 @@ apis:
   - NFT
   - Metadata
   - Attributes
+  - Collection
+  tags_raw:
+  - Tokens
+  - NFT
+  - Metadata
+  - Attributes
   - Collections
   properties:
   - type: Documentation
@@ -95,6 +121,12 @@ apis:
   humanURL: https://looksrare.dev/
   baseURL: https://api.looksrare.org/api
   tags:
+  - Collection
+  - NFT
+  - Metadata
+  - Statistics
+  - Seaport
+  tags_raw:
   - Collections
   - NFT
   - Metadata
@@ -109,6 +141,8 @@ apis:
   humanURL: https://looksrare.dev/reference/getorders
   baseURL: https://api.looksrare.org/api
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
@@ -125,6 +159,8 @@ apis:
   humanURL: https://looksrare.dev/reference/getorders
   baseURL: https://api.looksrare.org/api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -141,6 +177,8 @@ apis:
   humanURL: https://looksrare.dev/reference/getorders
   baseURL: https://api.looksrare.org/api
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
