@@ -1,11 +1,7 @@
 {
   "provider": "looksrare",
   "sources": [
-    "looksrare-collections-api-openapi.yml",
-    "looksrare-events-api-openapi.yml",
-    "looksrare-orders-api-openapi.yml",
-    "looksrare-seaport-api-openapi.yml",
-    "looksrare-tokens-api-openapi.yml"
+    "_original/looksrare-openapi.json"
   ],
   "outputs": [
     "looksrare-collections-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "looksrare-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "looksrare-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "looksrare-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "looksrare-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "looksrare-seaport-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "looksrare-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
