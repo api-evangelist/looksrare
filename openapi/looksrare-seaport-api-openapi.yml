@@ -167,12 +167,52 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    StrategyId:
+    Token:
+      type: object
+      description: NFT token metadata as indexed by LooksRare.
+      properties:
+        id:
+          type: string
+          description: Token ID within the collection.
+        collection:
+          $ref: '#/components/schemas/Collection'
+        name:
+          type: string
+          description: Token name.
+          nullable: true
+        description:
+          type: string
+          description: Token description.
+          nullable: true
+        image:
+          type: string
+          format: uri
+          description: Token image URI.
+          nullable: true
+        animationURI:
+          type: string
+          format: uri
+          description: Token animation or video URI.
+          nullable: true
+        attributes:
+          type: array
+          description: On-chain attribute traits for this token.
+          items:
+            type: object
+            properties:
+              traitType:
+                type: string
+              value:
+                type: string
+              displayType:
+                type: string
+                nullable: true
+    QuoteType:
       type: integer
       enum:
       - 0
       - 1
-      description: Maker strategy. 0 = Standard (specific token), 1 = Collection (any token in collection).
+      description: Order quote type. 0 = Bid (offer to buy), 1 = Ask (listing to sell).
     OrderCreateResponse:
       type: object
       properties:
@@ -183,6 +223,65 @@ components:
           nullable: true
         data:
           $ref: '#/components/schemas/MakerOrder'
+    EventType:
+      type: string
+      enum:
+      - LIST
+      - SALE
+      - OFFER
+      - CANCEL_LIST
+      - CANCEL_OFFER
+      description: Type of marketplace event.
+    OrderListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MakerOrder'
+    CollectionSeaportResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+        data:
+          type: object
+          properties:
+            eligible:
+              type: boolean
+              description: Whether this collection is eligible for trading via LooksRare Seaport.
+    CollectionType:
+      type: integer
+      enum:
+      - 0
+      - 1
+      description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
+    StrategyId:
+      type: integer
+      enum:
+      - 0
+      - 1
+      description: Maker strategy. 0 = Standard (specific token), 1 = Collection (any token in collection).
+    EventListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
     MakerOrder:
       type: object
       description: A maker order (ask or bid) stored in the LooksRare V2 off-chain order book.
@@ -255,29 +354,20 @@ components:
           items:
             type: object
           description: Merkle proof nodes for collection-wide orders.
-    OrderListResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MakerOrder'
-    QuoteType:
-      type: integer
-      enum:
-      - 0
-      - 1
-      description: Order quote type. 0 = Bid (offer to buy), 1 = Ask (listing to sell).
     EthereumAddress:
       type: string
       pattern: ^0x[a-fA-F0-9]{40}$
       description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
       example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Human-readable error message.
     Event:
       type: object
       description: A marketplace activity event on LooksRare.
@@ -308,104 +398,6 @@ components:
           type: string
           description: On-chain transaction hash for settled events.
           nullable: true
-    EventListResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-          nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-    OrderStatus:
-      type: string
-      enum:
-      - VALID
-      - CANCELLED
-      - EXECUTED
-      - EXPIRED
-      description: Status of an order in the LooksRare order book.
-    CollectionType:
-      type: integer
-      enum:
-      - 0
-      - 1
-      description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
-    CollectionSeaportResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-          nullable: true
-        data:
-          type: object
-          properties:
-            eligible:
-              type: boolean
-              description: Whether this collection is eligible for trading via LooksRare Seaport.
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-          description: Human-readable error message.
-    EventType:
-      type: string
-      enum:
-      - LIST
-      - SALE
-      - OFFER
-      - CANCEL_LIST
-      - CANCEL_OFFER
-      description: Type of marketplace event.
-    Token:
-      type: object
-      description: NFT token metadata as indexed by LooksRare.
-      properties:
-        id:
-          type: string
-          description: Token ID within the collection.
-        collection:
-          $ref: '#/components/schemas/Collection'
-        name:
-          type: string
-          description: Token name.
-          nullable: true
-        description:
-          type: string
-          description: Token description.
-          nullable: true
-        image:
-          type: string
-          format: uri
-          description: Token image URI.
-          nullable: true
-        animationURI:
-          type: string
-          format: uri
-          description: Token animation or video URI.
-          nullable: true
-        attributes:
-          type: array
-          description: On-chain attribute traits for this token.
-          items:
-            type: object
-            properties:
-              traitType:
-                type: string
-              value:
-                type: string
-              displayType:
-                type: string
-                nullable: true
     Collection:
       type: object
       description: NFT collection metadata as indexed by LooksRare.
@@ -442,6 +434,14 @@ components:
         verified:
           type: boolean
           description: Whether the collection is verified by LooksRare.
+    OrderStatus:
+      type: string
+      enum:
+      - VALID
+      - CANCELLED
+      - EXECUTED
+      - EXPIRED
+      description: Status of an order in the LooksRare order book.
   responses:
     BadRequest:
       description: Invalid request parameters.
@@ -449,14 +449,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error.
+    RateLimitExceeded:
+      description: Rate limit exceeded.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    RateLimitExceeded:
-      description: Rate limit exceeded.
+    InternalServerError:
+      description: Internal server error.
       content:
         application/json:
           schema:

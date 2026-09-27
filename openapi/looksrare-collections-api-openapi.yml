@@ -48,25 +48,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    RateLimitExceeded:
-      description: Rate limit exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     CollectionSeaportResponse:
       type: object
@@ -82,6 +63,11 @@ components:
             eligible:
               type: boolean
               description: Whether this collection is eligible for trading via LooksRare Seaport.
+    EthereumAddress:
+      type: string
+      pattern: ^0x[a-fA-F0-9]{40}$
+      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
+      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
     ErrorResponse:
       type: object
       properties:
@@ -91,11 +77,25 @@ components:
         message:
           type: string
           description: Human-readable error message.
-    EthereumAddress:
-      type: string
-      pattern: ^0x[a-fA-F0-9]{40}$
-      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
-      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
+  responses:
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimitExceeded:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

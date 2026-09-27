@@ -192,45 +192,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    EventType:
-      type: string
-      enum:
-      - LIST
-      - SALE
-      - OFFER
-      - CANCEL_LIST
-      - CANCEL_OFFER
-      description: Type of marketplace event.
-    Event:
-      type: object
-      description: A marketplace activity event on LooksRare.
-      properties:
-        id:
-          type: string
-          description: Unique event identifier.
-        type:
-          $ref: '#/components/schemas/EventType'
-        collection:
-          $ref: '#/components/schemas/Collection'
-        token:
-          $ref: '#/components/schemas/Token'
-        from:
-          $ref: '#/components/schemas/EthereumAddress'
-        to:
-          $ref: '#/components/schemas/EthereumAddress'
-          nullable: true
-        price:
-          type: string
-          description: Sale or offer price in wei.
-          nullable: true
-        createdAt:
-          type: string
-          format: date-time
-          description: Timestamp when the event was recorded.
-        hash:
-          type: string
-          description: On-chain transaction hash for settled events.
-          nullable: true
     EventListResponse:
       type: object
       properties:
@@ -243,21 +204,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Event'
-    CollectionType:
-      type: integer
-      enum:
-      - 0
-      - 1
-      description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-          description: Human-readable error message.
     Token:
       type: object
       description: NFT token metadata as indexed by LooksRare.
@@ -298,6 +244,56 @@ components:
               displayType:
                 type: string
                 nullable: true
+    EthereumAddress:
+      type: string
+      pattern: ^0x[a-fA-F0-9]{40}$
+      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
+      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
+    CollectionType:
+      type: integer
+      enum:
+      - 0
+      - 1
+      description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Human-readable error message.
+    Event:
+      type: object
+      description: A marketplace activity event on LooksRare.
+      properties:
+        id:
+          type: string
+          description: Unique event identifier.
+        type:
+          $ref: '#/components/schemas/EventType'
+        collection:
+          $ref: '#/components/schemas/Collection'
+        token:
+          $ref: '#/components/schemas/Token'
+        from:
+          $ref: '#/components/schemas/EthereumAddress'
+        to:
+          $ref: '#/components/schemas/EthereumAddress'
+          nullable: true
+        price:
+          type: string
+          description: Sale or offer price in wei.
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the event was recorded.
+        hash:
+          type: string
+          description: On-chain transaction hash for settled events.
+          nullable: true
     Collection:
       type: object
       description: NFT collection metadata as indexed by LooksRare.
@@ -334,20 +330,24 @@ components:
         verified:
           type: boolean
           description: Whether the collection is verified by LooksRare.
-    EthereumAddress:
+    EventType:
       type: string
-      pattern: ^0x[a-fA-F0-9]{40}$
-      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
-      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
+      enum:
+      - LIST
+      - SALE
+      - OFFER
+      - CANCEL_LIST
+      - CANCEL_OFFER
+      description: Type of marketplace event.
   responses:
-    RateLimitExceeded:
-      description: Rate limit exceeded.
+    BadRequest:
+      description: Invalid request parameters.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters.
+    RateLimitExceeded:
+      description: Rate limit exceeded.
       content:
         application/json:
           schema:
