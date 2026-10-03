@@ -55,6 +55,20 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Human-readable error message.
+    EthereumAddress:
+      type: string
+      pattern: ^0x[a-fA-F0-9]{40}$
+      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
+      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
     Token:
       type: object
       description: NFT token metadata as indexed by LooksRare.
@@ -95,36 +109,12 @@ components:
               displayType:
                 type: string
                 nullable: true
-    TokenResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-          nullable: true
-        data:
-          $ref: '#/components/schemas/Token'
-    EthereumAddress:
-      type: string
-      pattern: ^0x[a-fA-F0-9]{40}$
-      description: A valid Ethereum contract or wallet address (42 characters including 0x prefix).
-      example: '0x60e4d786628fea6478f785a6d7e704777c86a7c6'
     CollectionType:
       type: integer
       enum:
       - 0
       - 1
       description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-          description: Human-readable error message.
     Collection:
       type: object
       description: NFT collection metadata as indexed by LooksRare.
@@ -161,13 +151,17 @@ components:
         verified:
           type: boolean
           description: Whether the collection is verified by LooksRare.
+    TokenResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+        data:
+          $ref: '#/components/schemas/Token'
   responses:
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     RateLimitExceeded:
       description: Rate limit exceeded.
       content:
@@ -176,6 +170,12 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     InternalServerError:
       description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
       content:
         application/json:
           schema:
