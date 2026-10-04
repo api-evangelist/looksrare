@@ -192,45 +192,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    Event:
-      type: object
-      description: A marketplace activity event on LooksRare.
-      properties:
-        id:
-          type: string
-          description: Unique event identifier.
-        type:
-          $ref: '#/components/schemas/EventType'
-        collection:
-          $ref: '#/components/schemas/Collection'
-        token:
-          $ref: '#/components/schemas/Token'
-        from:
-          $ref: '#/components/schemas/EthereumAddress'
-        to:
-          $ref: '#/components/schemas/EthereumAddress'
-          nullable: true
-        price:
-          type: string
-          description: Sale or offer price in wei.
-          nullable: true
-        createdAt:
-          type: string
-          format: date-time
-          description: Timestamp when the event was recorded.
-        hash:
-          type: string
-          description: On-chain transaction hash for settled events.
-          nullable: true
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        message:
-          type: string
-          description: Human-readable error message.
     EventType:
       type: string
       enum:
@@ -285,24 +246,36 @@ components:
               displayType:
                 type: string
                 nullable: true
-    CollectionType:
-      type: integer
-      enum:
-      - 0
-      - 1
-      description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
-    EventListResponse:
+    Event:
       type: object
+      description: A marketplace activity event on LooksRare.
       properties:
-        success:
-          type: boolean
-        message:
+        id:
           type: string
+          description: Unique event identifier.
+        type:
+          $ref: '#/components/schemas/EventType'
+        collection:
+          $ref: '#/components/schemas/Collection'
+        token:
+          $ref: '#/components/schemas/Token'
+        from:
+          $ref: '#/components/schemas/EthereumAddress'
+        to:
+          $ref: '#/components/schemas/EthereumAddress'
           nullable: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
+        price:
+          type: string
+          description: Sale or offer price in wei.
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the event was recorded.
+        hash:
+          type: string
+          description: On-chain transaction hash for settled events.
+          nullable: true
     Collection:
       type: object
       description: NFT collection metadata as indexed by LooksRare.
@@ -339,7 +312,40 @@ components:
         verified:
           type: boolean
           description: Whether the collection is verified by LooksRare.
+    CollectionType:
+      type: integer
+      enum:
+      - 0
+      - 1
+      description: NFT collection standard. 0 = ERC-721, 1 = ERC-1155.
+    EventListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Human-readable error message.
   responses:
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     RateLimitExceeded:
       description: Rate limit exceeded.
       content:
@@ -348,12 +354,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     InternalServerError:
       description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters.
       content:
         application/json:
           schema:
