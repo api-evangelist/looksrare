@@ -64,48 +64,143 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-LooksRare is a community-first NFT marketplace built on Ethereum that rewards traders, collectors, and creators. The platform operates an off-chain order book with on-chain settlement via the LooksRare V2 protocol and Seaport integration, supporting ERC-721 and ERC-1155 tokens.
+LooksRare is a community-first NFT marketplace built on Ethereum that rewards traders, collectors, and creators with LOOKS token incentives. The platform operates an off-chain order book with on-chain settlement via the LooksRare V2 protocol (and Seaport integration), supporting standard and collection-wide orders for ERC-721 and ERC-1155 tokens. The public REST API exposes read and write access to orders, events (listings, sales, offers, cancellations), token metadata, and collection data across Ethereum Mainnet and the Sepolia testnet. API access is free with attribution; a mainnet API key is required for write operations such as order creation.
 
-## Public REST API
+**Areas:** NFT · Marketplace · Ethereum · Web3 · Order · Collection · Tokens · Event · ERC-721 · ERC-1155 · Seaport · Community
 
-Base URL (Mainnet): `https://api.looksrare.org/api`
-Base URL (Sepolia testnet): `https://api-sepolia.looksrare.org/api`
+## LooksRare on APIs.io
 
-### Key Endpoints
+Everything profiled for LooksRare is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/looksrare/](https://apis.io/providers/looksrare/)** — or go straight to one of the APIs or properties below.
 
-| Version | Method | Path | Description |
-|---------|--------|------|-------------|
-| v2 | GET | /v2/orders | Retrieve asks and bids with filtering by collection, token, signer, and status |
-| v2 | POST | /v2/orders | Submit a signed maker order (ask or bid) |
-| v2 | GET | /v2/events | Retrieve LIST, SALE, OFFER, CANCEL_LIST, CANCEL_OFFER events |
-| v2 | GET | /v2/orders/seaport | Retrieve Seaport-compatible orders |
-| v2 | POST | /v2/orders/seaport | Create Seaport-compatible orders |
-| v2 | GET | /v2/events/seaport | Retrieve Seaport events |
-| v2 | GET | /v2/collections/seaport | Check if a collection supports Seaport trading |
-| v1 | GET | /v1/tokens | Retrieve token metadata and attributes |
-| v1 | GET | /v1/events | Legacy V1 protocol events, mints, and transfers |
+### APIs (8)
 
-### Authentication
+- [LooksRare Events API](https://apis.io/apis/looksrare/events-api/) — Retrieve token and order activity events from the LooksRare marketplace including LIST, SALE, OFFER, CANCEL_LIST, and CANCEL_OFFER event types. GET…
+- [LooksRare Tokens API](https://apis.io/apis/looksrare/tokens-api/) — Retrieve NFT token metadata including token details, collection information, and token attributes for any token indexed by LooksRare. GET /v1/tokens accepts…
+- [LooksRare Collections API](https://apis.io/apis/looksrare/collections-api/) — Retrieve collection-level data for NFT collections indexed on LooksRare. Endpoints return Collection objects including logoURI, bannerURI, and collection…
+- [LooksRare Collections API](https://apis.io/apis/looksrare/looksrare-collections-api/) — Retrieve NFT collection-level metadata, statistics, and integration eligibility.
+- [LooksRare Events API](https://apis.io/apis/looksrare/looksrare-events-api/) — Retrieve token and order activity events from the LooksRare marketplace, including listings, sales, offers, and cancellations.
+- [LooksRare Orders API](https://apis.io/apis/looksrare/looksrare-orders-api/) — Read and write NFT maker orders in the LooksRare V2 off-chain order book. Supports both standard (specific token) and collection-wide strategies for asks…
+- [LooksRare Seaport API](https://apis.io/apis/looksrare/looksrare-seaport-api/) — Endpoints specific to the LooksRare Seaport integration, enabling Seaport-compatible orders and events while earning LooksRare rewards.
+- [LooksRare Tokens API](https://apis.io/apis/looksrare/looksrare-tokens-api/) — Retrieve NFT token metadata including collection information and on-chain attribute traits.
 
-- **Sepolia testnet**: No API key required
-- **Mainnet read endpoints**: No API key required
-- **Mainnet write endpoints** (POST /v2/orders): API key required — request via [developer Discord](https://discord.gg/LooksRareDevelopers)
+### Published properties
 
-### Rate Limits
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-A 10-second response cache is applied to all endpoints. HTTP 429 responses include a `Retry-After` header. Higher rate limits are available by request for production applications.
+#### MCP servers (1)
 
-### Attribution
+Model Context Protocol servers that expose the API to agents.
 
-The API is free to use. In exchange, integrators must display a visible link to [looksrare.org](https://looksrare.org) alongside any NFT data shown on their platform.
+- [looksrare](https://apis.io/servers/looksrare/looksrare/)
 
-## Resources
+#### Agentic access (1)
 
-- [Marketplace](https://looksrare.org)
-- [Developer Documentation](https://docs.looksrare.org/developers/welcome)
-- [API Reference](https://looksrare.dev)
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Looksrare Agentic Access](https://apis.io/agentic-access/looksrare/looksrare-agentic-access/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Looksrare Context](https://apis.io/jsonld/looksrare/looksrare/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [LooksRare Public Collections API](https://apis.io/collections/looksrare/open-looksrare-collections-api/)
+- [LooksRare Public Collections Events API](https://apis.io/collections/looksrare/open-looksrare-events-api/)
+- [LooksRare Public Collections Orders API](https://apis.io/collections/looksrare/open-looksrare-orders-api/)
+- [LooksRare Public Collections Seaport API](https://apis.io/collections/looksrare/open-looksrare-seaport-api/)
+- [LooksRare Public Collections Tokens API](https://apis.io/collections/looksrare/open-looksrare-tokens-api/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Looksrare Authentication](https://apis.io/security/looksrare/looksrare-authentication/)
+- [Looksrare Domain Security](https://apis.io/security/looksrare/looksrare-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Looksrare Plans Pricing](https://apis.io/plans/looksrare/looksrare-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Looksrare Rate Limits](https://apis.io/rate-limits/looksrare/looksrare-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Looksrare Finops](https://apis.io/finops/looksrare/looksrare-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://looksrare.org)
+- [Documentation](https://docs.looksrare.org/developers/welcome)
 - [Changelog](https://looksrare.dev/changelog)
-- [SDK v2 (GitHub)](https://github.com/LooksRare/sdk-v2)
-- [SDK v2 (npm)](https://www.npmjs.com/package/@looksrare/sdk-v2)
-- [Developer Discord](https://discord.gg/LooksRareDevelopers)
-- [GitHub Organization](https://github.com/LooksRare)
+- [Blog](https://docs.looksrare.org/blog)
+- [GitHub](https://github.com/LooksRare)
+
+## API Evangelist rating
+
+**Kin Score 33.2** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 57.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 45.2 |
+| Access clarity | 5.3 |
+
+**Agent readiness 29.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/looksrare/](https://apis.io/providers/looksrare/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LooksRare: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/looksrare/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
